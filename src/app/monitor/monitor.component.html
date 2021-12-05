@@ -1,0 +1,29 @@
+<mat-accordion *ngFor="let solicitation of solicitations">
+  <mat-expansion-panel class="container-monitor">
+    <mat-expansion-panel-header>
+      {{ solicitation.product.description }}
+    </mat-expansion-panel-header>
+    <mat-card>
+      <mat-card-title-group>
+        <mat-card-title>{{ solicitation.product.description }}</mat-card-title>
+        <mat-card-subtitle>{{ solicitation.product.sku }}</mat-card-subtitle>
+        <img
+          mat-card-sm-image
+          [src]="solicitation.product.imageUrl"
+          alt="Sem imagem"
+        />
+      </mat-card-title-group>
+      <mat-card-content>
+        <p>
+          Quantidade: <b>{{ solicitation.amount }}</b> pç.
+        </p>
+        <p>Ordem: {{ solicitation.order }}</p>
+      </mat-card-content>
+      <mat-divider inset></mat-divider>
+      <mat-card-actions>
+        <button mat-button color="accent">CONFIRMADO</button>
+        <button mat-button color="warn">NTP</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-expansion-panel>
+</mat-accordion>
