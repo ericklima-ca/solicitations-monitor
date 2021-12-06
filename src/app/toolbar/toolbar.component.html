@@ -1,4 +1,13 @@
-<mat-toolbar>
-  <mat-icon matBadge="10" matBadgeColor="warn">menu</mat-icon>
-  <img src="../../assets/icons/icon-72x72.png" width="50" height="50" />
-</mat-toolbar>
+<div class="container-toolbar">
+
+  <mat-toolbar>
+    <mat-icon matBadge="10" matBadgeColor="warn">menu</mat-icon>
+    <span class="logo">
+      <a routerLink="">
+      <img src="../../assets/icons/icon-72x72.png" width="50" height="50" /></a>
+    </span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/history" routerLinkActive="mat-primary">Histórico</a>
+
+  </mat-toolbar>
+</div>

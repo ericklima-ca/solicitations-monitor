@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {MatTableModule} from '@angular/material/table';
+
 
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -21,6 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SolicitationCreateComponent } from './solicitations/solicitation-create/solicitation-create.component';
 import { MonitorComponent } from './monitor/monitor.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,7 @@ import { MonitorComponent } from './monitor/monitor.component';
     ToolbarComponent,
     SolicitationCreateComponent,
     MonitorComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +43,7 @@ import { MonitorComponent } from './monitor/monitor.component';
       registrationStrategy: 'registerWhenStable:30000',
     }),
     BrowserAnimationsModule,
+    AppRoutingModule,
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
@@ -50,6 +56,7 @@ import { MonitorComponent } from './monitor/monitor.component';
     FormsModule,
     MatDividerModule,
     MatExpansionModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],

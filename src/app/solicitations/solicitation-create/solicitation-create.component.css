@@ -1,12 +1,4 @@
-.mat-form-field {
-  width: 100%;
-}
-button {
+.btn-solicit,
+.divider {
   margin-top: 1rem;
-}
-
-.container-form {
-  margin-left: 1rem;
-  margin-top: 1rem;
-  margin-right: 2rem;
 }

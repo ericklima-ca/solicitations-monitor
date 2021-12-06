@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Solicitation } from '../solicitations/solicitation.model';
+import { Solicitation } from '../models';
 
 @Component({
   selector: 'app-monitor',
@@ -19,6 +19,12 @@ export class MonitorComponent {
       },
       amount: 7,
       center: '114',
+      user: {
+        id: '12312',
+        name: 'Erick',
+        department: 'Escritório'
+      },
+      createdAt: '2021-05-20 10:11:55'
     },
     {
       id: '3c12j01c92j3',
@@ -31,6 +37,12 @@ export class MonitorComponent {
       },
       amount: 20,
       center: '104',
+      user: {
+        id: '12312',
+        name: 'Erick',
+        department: 'Escritório'
+      },
+      createdAt: '2021-05-20 12:29:11'
     },
   ];
 }

@@ -1,7 +1,14 @@
-interface Product {
+
+export interface Product {
   sku: string;
   description: string;
   imageUrl: string;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  department: string;
 }
 
 export interface Solicitation {
@@ -10,4 +17,7 @@ export interface Solicitation {
   product: Product;
   amount: number;
   center: string;
+  user: User;
+  createddAt: string;
+  updatedAt: string;
 }
