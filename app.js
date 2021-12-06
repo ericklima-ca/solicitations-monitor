@@ -8,6 +8,6 @@ app.get('/*', (req, res) => {
   res.sendFile('./dist/solicitations-monitor/index.html');
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 8080, () => {
   console.log(` Server is running at https://localhost:3000`);
 });
