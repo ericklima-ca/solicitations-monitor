@@ -7,8 +7,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "start:server": "nodemon app.js",
-    "start": "node app.js",
-    "postinstall": "ng build --aot --prod"
+    "start": "ng serve"
   },
   "private": true,
   "dependencies": {

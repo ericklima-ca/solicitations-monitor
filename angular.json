@@ -75,8 +75,7 @@
               "browserTarget": "solicitations-monitor:build:production"
             },
             "development": {
-              "browserTarget": "solicitations-monitor:build:development",
-              "host": "192.168.15.77"
+              "browserTarget": "solicitations-monitor:build:development"
             }
           },
           "defaultConfiguration": "development"

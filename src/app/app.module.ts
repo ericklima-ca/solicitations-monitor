@@ -25,6 +25,8 @@ import { SolicitationCreateComponent } from './solicitations/solicitation-create
 import { MonitorComponent } from './monitor/monitor.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HistoryComponent } from './history/history.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { HistoryComponent } from './history/history.component';
     SolicitationCreateComponent,
     MonitorComponent,
     HistoryComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

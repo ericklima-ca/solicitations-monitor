@@ -1,0 +1,46 @@
+<div class="container-login">
+  <mat-card>
+    <mat-card-title-group>
+      <mat-card-title> LOGIN </mat-card-title>
+    </mat-card-title-group>
+    <form #form="ngForm">
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Matrícula</mat-label>
+          <input
+            matInput
+            type="number"
+            name="enroll"
+            ngModel
+            placeholder="Matrícula"
+            required
+          />
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Senha</mat-label>
+          <input
+            matInput
+            type="password"
+            name="password"
+            ngModel
+            placeholder="Senha"
+            required
+            minlength="6"
+          />
+        </mat-form-field>
+      </p>
+      <mat-divider class="divider"></mat-divider>
+      <button class="btn-login" mat-raised-button color="primary" type="submit">
+        Logar
+      </button>
+      |
+      <a>
+        <button href="#" class="btn-login" mat-stroked-button color="primary">
+          Novo usuário
+        </button>
+      </a>
+    </form>
+  </mat-card>
+</div>
