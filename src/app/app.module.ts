@@ -32,7 +32,7 @@ import { HistoryComponent } from './history/history.component';
     ToolbarComponent,
     SolicitationCreateComponent,
     MonitorComponent,
-    HistoryComponent
+    HistoryComponent,
   ],
   imports: [
     BrowserModule,

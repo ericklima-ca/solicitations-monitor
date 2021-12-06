@@ -1,5 +1,5 @@
 .logo {
-  padding-left: 5%;
+  padding: 10px 0 0 0;
 }
 .container-toolbar {
   margin-bottom: 1rem;
@@ -17,4 +17,20 @@
 a {
   text-decoration: none;
   text-transform: uppercase;
+}
+
+.example-container {
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
 }

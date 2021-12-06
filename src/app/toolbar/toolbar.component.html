@@ -1,7 +1,15 @@
 <div class="container-toolbar">
 
   <mat-toolbar>
-    <mat-icon matBadge="10" matBadgeColor="warn">menu</mat-icon>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>refresh</mat-icon>
+        <span>Atualizar</span>
+      </button>
+    </mat-menu>
     <span class="logo">
       <a routerLink="">
       <img src="../../assets/icons/icon-72x72.png" width="50" height="50" /></a>
