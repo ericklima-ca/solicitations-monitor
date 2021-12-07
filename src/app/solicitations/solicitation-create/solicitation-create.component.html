@@ -1,71 +1,100 @@
 <div class="container-form">
-  <form (submit)="onCreateSolicitation(form)" #form="ngForm">
-    <mat-form-field appearance="outline">
-      <mat-label>Ordem</mat-label>
-      <input matInput type="number" name="order" ngModel placeholder="Ordem" />
-      <mat-hint>Ordem a que se refere a solicitação</mat-hint>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>SKU</mat-label>
-      <input
-        matInput
-        type="number"
-        name="sku"
-        ngModel
-        required
-        placeholder="SKU"
-        #content="ngModel"
-      />
-      <mat-hint>Código do produto</mat-hint>
-      <mat-error *ngIf="content.invalid">Coloque o SKU do produto.</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Produto</mat-label>
-      <input
-        matInput
-        type="text"
-        name="product"
-        ngModel
-        required
-        placeholder="Produto"
-        #content="ngModel"
-      />
-      <mat-hint>Descrição do produto</mat-hint>
-      <mat-error *ngIf="content.invalid">Coloque o produto.</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Quantidade</mat-label>
-      <input
-        matInput
-        type="number"
-        name="amount"
-        ngModel
-        required
-        placeholder="Quantidade"
-        #content="ngModel"
-      />
-      <mat-hint>Quantidade solicitada</mat-hint>
-      <mat-error *ngIf="content.invalid"
-        >Coloque a quantidade solicitada.</mat-error
+  <mat-card>
+    <mat-card-title>Nova Solicitação</mat-card-title>
+
+    <form (submit)="onCreateSolicitation(form)" #form="ngForm">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Ordem</mat-label>
+          <input
+            matInput
+            type="number"
+            name="order"
+            ngModel
+            placeholder="Ordem"
+          />
+          <mat-hint>Ordem a que se refere a solicitação</mat-hint>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>SKU</mat-label>
+          <input
+            matInput
+            type="number"
+            name="sku"
+            ngModel
+            required
+            placeholder="SKU"
+            #content="ngModel"
+          />
+          <mat-hint>Código do produto</mat-hint>
+          <mat-error *ngIf="content.invalid"
+            >Coloque o SKU do produto.</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Produto</mat-label>
+          <input
+            matInput
+            type="text"
+            name="product"
+            ngModel
+            required
+            placeholder="Produto"
+            #content="ngModel"
+          />
+          <mat-hint>Descrição do produto</mat-hint>
+          <mat-error *ngIf="content.invalid">Coloque o produto.</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Quantidade</mat-label>
+          <input
+            matInput
+            type="number"
+            name="amount"
+            ngModel
+            required
+            placeholder="Quantidade"
+            #content="ngModel"
+          />
+          <mat-hint>Quantidade solicitada</mat-hint>
+          <mat-error *ngIf="content.invalid"
+            >Coloque a quantidade solicitada.</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Centro</mat-label>
+          <input
+            matInput
+            type="number"
+            name="center"
+            ngModel
+            required
+            placeholder="Centro"
+            #content="ngModel"
+          />
+          <mat-hint>Centro que será solicitado</mat-hint>
+          <mat-error *ngIf="content.invalid"
+            >Coloque o centro solicitado.</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <mat-divider></mat-divider>
+      <button
+        class="btn-solicit"
+        mat-raised-button
+        color="primary"
+        type="submit"
       >
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Centro</mat-label>
-      <input
-        matInput
-        type="number"
-        name="center"
-        ngModel
-        required
-        placeholder="Centro"
-        #content="ngModel"
-      />
-      <mat-hint>Centro que será solicitado</mat-hint>
-      <mat-error *ngIf="content.invalid"
-        >Coloque o centro solicitado.</mat-error
-      >
-    </mat-form-field>
-    <mat-divider class="divider"></mat-divider>
-    <button class="btn-solicit" mat-raised-button color="primary" type="submit">SOLICITAR</button>
-  </form>
+        SOLICITAR
+      </button>
+    </form>
+  </mat-card>
 </div>

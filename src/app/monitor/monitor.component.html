@@ -1,7 +1,8 @@
 <mat-accordion *ngFor="let solicitation of solicitations; index as i">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
-      #{{solicitation.id.slice(0,4)}} | {{ solicitation.product.description }}
+      #{{ solicitation.id.slice(0, 4) }} |
+      {{ solicitation.product.description }}
     </mat-expansion-panel-header>
     <mat-card>
       <mat-card-title-group>
@@ -18,8 +19,8 @@
           Quantidade: <b>{{ solicitation.amount }}</b> pç.
         </p>
         <p>Ordem: {{ solicitation.order }}</p>
-        <p>Por: {{solicitation.user.name}}</p>
-        <small>{{solicitation.createdAt}}</small>
+        <p>Por: {{ solicitation.user.name }}</p>
+        <small>{{ solicitation.createdAt }}</small>
       </mat-card-content>
       <mat-divider inset></mat-divider>
       <mat-card-actions>

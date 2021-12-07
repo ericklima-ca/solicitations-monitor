@@ -3,11 +3,9 @@
 }
 .container-toolbar {
   margin-bottom: 1rem;
-  box-shadow: 0 0px 1px rgba(0,0,0,0.25),
-              0 0px 2px rgba(0,0,0,0.20),
-              0 0px 4px rgba(0,0,0,0.15),
-              0 0px 8px rgba(0,0,0,0.10),
-              0 0px 16px rgba(0,0,0,0.05);
+  box-shadow: 0 0px 1px rgba(0, 0, 0, 0.25), 0 0px 2px rgba(0, 0, 0, 0.2),
+    0 0px 4px rgba(0, 0, 0, 0.15), 0 0px 8px rgba(0, 0, 0, 0.1),
+    0 0px 16px rgba(0, 0, 0, 0.05);
 }
 
 .spacer {

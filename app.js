@@ -1,11 +1,11 @@
-const express = require('express');
+const express = require("express");
 
 const app = express();
 
-app.use('/', express.static('./dist/solicitations-monitor'));
+app.use("/", express.static("./dist/solicitations-monitor"));
 
-app.get('/*', (req, res) => {
-  res.sendFile('./dist/solicitations-monitor/index.html');
+app.get("/*", (req, res) => {
+  res.sendFile("./dist/solicitations-monitor/index.html");
 });
 
 app.listen(process.env.PORT || 8080, () => {

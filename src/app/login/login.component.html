@@ -1,23 +1,16 @@
 <div class="container-login">
   <mat-card>
-    <mat-card-title-group>
-      <mat-card-title> LOGIN </mat-card-title>
-    </mat-card-title-group>
+    <div>
+      <mat-card-title> Login </mat-card-title>
+    </div>
     <form #form="ngForm">
-      <p>
+      <div>
         <mat-form-field appearance="fill">
           <mat-label>Matrícula</mat-label>
-          <input
-            matInput
-            type="number"
-            name="enroll"
-            ngModel
-            placeholder="Matrícula"
-            required
-          />
+          <input matInput type="number" name="enroll" ngModel required />
         </mat-form-field>
-      </p>
-      <p>
+      </div>
+      <div>
         <mat-form-field appearance="fill">
           <mat-label>Senha</mat-label>
           <input
@@ -25,12 +18,11 @@
             type="password"
             name="password"
             ngModel
-            placeholder="Senha"
             required
             minlength="6"
           />
         </mat-form-field>
-      </p>
+      </div>
       <mat-divider class="divider"></mat-divider>
       <button class="btn-login" mat-raised-button color="primary" type="submit">
         Logar

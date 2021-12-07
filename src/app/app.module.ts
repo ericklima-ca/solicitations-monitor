@@ -13,8 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MatTableModule} from '@angular/material/table';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -36,7 +36,7 @@ import { RegisterComponent } from './register/register.component';
     MonitorComponent,
     HistoryComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +60,8 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     MatDividerModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

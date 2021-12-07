@@ -22,9 +22,9 @@ export class MonitorComponent {
       user: {
         id: '12312',
         name: 'Erick',
-        department: 'Escritório'
+        department: 'Escritório',
       },
-      createdAt: '2021-05-20 10:11:55'
+      createdAt: '2021-05-20 10:11:55',
     },
     {
       id: '3c12j01c92j3',
@@ -40,9 +40,9 @@ export class MonitorComponent {
       user: {
         id: '12312',
         name: 'Erick',
-        department: 'Escritório'
+        department: 'Escritório',
       },
-      createdAt: '2021-05-20 12:29:11'
+      createdAt: '2021-05-20 12:29:11',
     },
   ];
 }

@@ -8,10 +8,10 @@ import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: '', component: MonitorComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'create', component: SolicitationCreateComponent },
   { path: 'history', component: HistoryComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

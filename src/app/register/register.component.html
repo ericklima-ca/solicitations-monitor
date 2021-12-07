@@ -1,0 +1,63 @@
+<mat-card class="container-register">
+  <div id="title-register">
+    <mat-card-title> Registrar</mat-card-title>
+  </div>
+  <form>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Matrícula</mat-label>
+        <input matInput type="number" ngModel required name="enroll" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput type="text" ngModel required name="name" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input matInput type="email" ngModel required name="email" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Senha</mat-label>
+        <input
+          matInput
+          type="password"
+          ngModel
+          required
+          minlength="6"
+          name="password"
+          #content="ngModel"
+        />
+        <mat-error *ngIf="content.invalid"
+          >A senha deve ter no mínimo 6 dígitos.</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Centro</mat-label>
+        <mat-select>
+          <mat-option value="103">103</mat-option>
+          <mat-option value="105">105</mat-option>
+          <mat-option value="106">106</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <div>
+      <button
+        class="btn-register"
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
+        REGISTRAR
+      </button>
+    </div>
+  </form>
+</mat-card>

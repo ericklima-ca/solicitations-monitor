@@ -11,3 +11,6 @@
 .btn-login {
   margin-top: 1rem;
 }
+mat-form-field {
+  padding: 10px;
+}
