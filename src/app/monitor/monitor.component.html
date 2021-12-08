@@ -1,38 +1,63 @@
-<div>
-  <h1>2 SOLICITAÇÕES PENDENTES</h1>
-</div>
-<mat-accordion *ngFor="let solicitation of solicitations; index as i">
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      #{{ solicitation.id.slice(0, 4) }} |
-      {{ solicitation.product.description }}
-    </mat-expansion-panel-header>
-    <mat-card>
-      <mat-card-title-group>
-        <mat-card-title>{{ solicitation.product.description }}</mat-card-title>
-        <mat-card-subtitle>{{ solicitation.product.sku }}</mat-card-subtitle>
-        <img
-          mat-card-xl-image
-          [src]="solicitation.product.imageUrl"
-          alt="Sem imagem"
-        />
-      </mat-card-title-group>
-      <mat-card-content>
-        <p>
-          Quantidade: <b>{{ solicitation.amount }}</b> pç.
-        </p>
-        <p>Ordem: {{ solicitation.order }}</p>
-        <p>Por: {{ solicitation.user.name }}</p>
-        <small>{{ solicitation.createdAt }}</small>
-      </mat-card-content>
-      <mat-divider inset></mat-divider>
-      <mat-card-actions>
-        <button mat-button color="primary">CONFIRMADO</button>
-        <button mat-button color="warn">NTP</button>
-      </mat-card-actions>
-    </mat-card>
-  </mat-expansion-panel>
-</mat-accordion>
-<a routerLink="create" class="float">
-  <mat-icon class="btn-float">add</mat-icon>
-</a>
+<mat-card>
+  <mat-card-title>
+    <div>
+      <h1>2 SOLICITAÇÕES PENDENTES NO CENTRO {{ center }}</h1>
+    </div>
+  </mat-card-title>
+
+  <mat-accordion *ngFor="let solicitation of solicitations; index as i">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        #{{ solicitation.id.slice(0, 4) }} |
+        {{ solicitation.product.description }}
+      </mat-expansion-panel-header>
+      <mat-card>
+        <mat-card-title-group>
+          <mat-card-title>{{
+            solicitation.product.description
+          }}</mat-card-title>
+          <mat-card-subtitle>
+            {{ solicitation.product.sku }}
+            |
+            {{ solicitation.product.ean }}
+          </mat-card-subtitle>
+          <img
+            mat-card-lg-image
+            [src]="solicitation.product.imageUrl"
+            alt="Sem imagem"
+          />
+        </mat-card-title-group>
+        <mat-card-content>
+          <p>
+            Quantidade: <b>{{ solicitation.amount }}</b> pç.
+          </p>
+          <p>Ordem: {{ solicitation.order }}</p>
+          <p>Por: {{ solicitation.user.name }}</p>
+          <small>{{ solicitation.createdAt }}</small>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <div class="action-response">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="openDialog('CONFIRMADO')"
+            >
+              CONFIRMADO
+            </button>
+            <button mat-button color="warn" (click)="openDialog('NTP')">
+              NTP
+            </button>
+          </div>
+          <div class="action-request">
+            <button mat-button color="primary">EDITAR</button>
+            <button mat-button color="warn">DELETAR</button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <a routerLink="create" class="float">
+    <mat-icon class="btn-float">add</mat-icon>
+  </a>
+</mat-card>

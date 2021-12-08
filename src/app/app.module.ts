@@ -15,6 +15,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -27,6 +28,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HistoryComponent } from './history/history.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { MonitorDialogResponseComponent } from './monitor/monitor-dialog-response/monitor-dialog-response.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { RegisterComponent } from './register/register.component';
     HistoryComponent,
     LoginComponent,
     RegisterComponent,
+    MonitorDialogResponseComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ import { RegisterComponent } from './register/register.component';
     MatExpansionModule,
     MatTableModule,
     MatSelectModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

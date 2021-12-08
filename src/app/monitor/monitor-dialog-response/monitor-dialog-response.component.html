@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Confirmação de Resposta</h1>
+<mat-dialog-content>
+  <p>
+    Resposta: <b id="{{ data.response }}"> {{ data.response }} </b>
+  </p>
+  <p>Produto: {{ data.product }}</p>
+  <p>SKU: {{ data.sku }}</p>
+  <p>Quantidade: {{ data.amount }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+    Confirmar
+  </button>
+  <button mat-button color="warn" type="submit" mat-dialog-close>
+    Cancelar
+  </button>
+</mat-dialog-actions>
