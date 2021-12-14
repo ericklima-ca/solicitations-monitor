@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Solicitation } from '../../models';
-import { SolicitationService } from '../solicitation.service';
+import { SolicitationService } from '../../services/solicitation/solicitation.service';
 
 @Component({
   selector: 'app-solicitation-create',
@@ -18,13 +18,7 @@ export class SolicitationCreateComponent {
 
     let { order, sku, product, amount, center } = form.value;
 
-    this.solicitationService.createSolicitation(
-      order,
-      sku,
-      product,
-      amount,
-      center
-    );
-    form.resetForm();
+    // this.solicitationService.createSolicitation({ order, product, product, amount, center });
+    // form.resetForm();
   }
 }
