@@ -1,12 +1,13 @@
 <mat-card class="container-register">
   <div id="title-register">
+    <span *NgIf="message">{{ message }}</span>
     <mat-card-title> Registrar</mat-card-title>
   </div>
-  <form>
+  <form (submit)="onRegister(form)" #form="ngForm">
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Matrícula</mat-label>
-        <input matInput type="number" ngModel required name="enroll" />
+        <input matInput type="number" ngModel required name="id" />
       </mat-form-field>
     </div>
     <div>
@@ -41,10 +42,10 @@
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Centro</mat-label>
-        <mat-select>
-          <mat-option value="103">103</mat-option>
-          <mat-option value="105">105</mat-option>
-          <mat-option value="106">106</mat-option>
+        <mat-select name="CenterId" *ngFor="let center of centers">
+          <mat-option *ngIf="center != 102" [value]="{{center}}">{{
+            center
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

@@ -8,7 +8,7 @@
   <mat-accordion *ngFor="let solicitation of solicitations; index as i">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        #{{ solicitation.id.slice(0, 4) }} |
+        #{{ solicitation.id }} |
         {{ solicitation.product.description }}
       </mat-expansion-panel-header>
       <mat-card>

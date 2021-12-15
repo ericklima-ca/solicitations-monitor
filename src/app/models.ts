@@ -9,7 +9,6 @@ export interface User {
   id: number;
   name: string;
   lastName: string;
-  department: string;
   email: string;
   password: string;
   active: boolean;
@@ -41,4 +40,18 @@ export interface Response {
   solicitation: Solicitation;
   createddAt: string;
   updatedAt: string;
+}
+
+export interface LoginForm {
+  id: number;
+  password: string;
+}
+
+export interface RegisterForm {
+  id: number;
+  name: string;
+  lastName: string;
+  email: string;
+  CenterId: number;
+  password: string;
 }

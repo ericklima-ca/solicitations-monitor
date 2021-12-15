@@ -1,15 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Solicitation } from '../models';
 import { MatDialog } from '@angular/material/dialog';
 import { MonitorDialogResponseComponent } from './monitor-dialog-response/monitor-dialog-response.component';
+import { SolicitationService } from '../services/solicitation/solicitation.service';
 
 @Component({
   selector: 'app-monitor',
   templateUrl: './monitor.component.html',
   styleUrls: ['./monitor.component.css'],
 })
-export class MonitorComponent {
-  constructor(public dialog: MatDialog) {}
+export class MonitorComponent implements OnInit {
+  constructor(
+    public dialog: MatDialog,
+    public solicitationService: SolicitationService
+  ) {}
+
+  ngOnInit() {
+    this.solicitationService.getSolicitations();
+    
+  }
 
   openDialog(response: string) {
     const dialogRef = this.dialog.open(MonitorDialogResponseComponent, {
