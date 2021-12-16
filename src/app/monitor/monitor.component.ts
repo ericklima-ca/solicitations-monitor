@@ -15,11 +15,6 @@ export class MonitorComponent implements OnInit {
     public solicitationService: SolicitationService
   ) {}
 
-  ngOnInit() {
-    this.solicitationService.getSolicitations();
-    
-  }
-
   openDialog(response: string) {
     const dialogRef = this.dialog.open(MonitorDialogResponseComponent, {
       data: {
@@ -93,4 +88,8 @@ export class MonitorComponent implements OnInit {
       createdAt: '2021-05-20 12:29:11',
     },
   ];
+
+  ngOnInit() {
+    this.solicitationService.getSolicitations();
+  }
 }

@@ -10,8 +10,9 @@ const routes: Routes = [
   { path: '', component: MonitorComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'create', component: SolicitationCreateComponent },
-  { path: 'history', component: HistoryComponent },
   { path: 'login', component: LoginComponent },
+  //  { path: 'history', component: HistoryComponent },
+  { path: '**', redirectTo: '' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

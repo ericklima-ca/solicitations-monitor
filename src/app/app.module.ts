@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,6 +30,7 @@ import { HistoryComponent } from './history/history.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { MonitorDialogResponseComponent } from './monitor/monitor-dialog-response/monitor-dialog-response.component';
+import { RequestsInterceptor } from './services/interceptor/requests-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { MonitorDialogResponseComponent } from './monitor/monitor-dialog-respons
     MatSelectModule,
     MatDialogModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: RequestsInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -5,13 +5,14 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class RequestsInterceptor implements HttpInterceptor {
   token?: string;
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService, public router: Router) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler

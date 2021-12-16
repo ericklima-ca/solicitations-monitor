@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, map } from 'rxjs';
-import { Product, Solicitation } from 'src/app/models';
+import { Center, Product, Solicitation } from 'src/app/models';
 
 interface ResponseData {
   solicitations: any[];
