@@ -89,7 +89,5 @@ export class MonitorComponent implements OnInit {
     },
   ];
 
-  ngOnInit() {
-    this.solicitationService.getSolicitations();
-  }
+  ngOnInit() {}
 }

@@ -16,7 +16,7 @@ export class SolicitationService {
   solicitationsSubject = new Subject<Solicitation[]>();
   // url: string = `https://${process.env['HEROKU_APP_NAME']}.herokuapp.com`;
 
-  constructor(private http: HttpClient) {}
+  constructor(public http: HttpClient) {}
 
   getSolicitationsSubject() {
     return this.solicitationsSubject.asObservable();
@@ -25,7 +25,7 @@ export class SolicitationService {
   getSolicitations() {
     this.http
       .get<{ solicitations: Solicitation[] }>(
-        'http://localhost/3000/api/solicitaions/'
+        'http://localhost:3000/api/solicitations/'
       )
       .subscribe((response) => {
         this.solicitations = response.solicitations;
@@ -36,7 +36,7 @@ export class SolicitationService {
   createSolicitation(solicitation: Solicitation) {
     this.http
       .post<ResponseData>(
-        'http://localhost/3000/api/solicitaions/new',
+        'http://localhost:3000/api/solicitations/new',
         solicitation
       )
       .subscribe(() => {});

@@ -1,5 +1,8 @@
 <div class="container-login">
   <mat-card>
+    <div class="alert-invalid" *ngIf="message">
+      <small>{{ message }}</small>
+    </div>
     <div>
       <mat-card-title> Login </mat-card-title>
     </div>
@@ -24,7 +27,13 @@
         </mat-form-field>
       </div>
       <mat-divider class="divider"></mat-divider>
-      <button class="btn-login" mat-raised-button color="primary" type="submit">
+      <button
+        [disabled]="form.invalid ? true : false"
+        class="btn-login"
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
         Entrar
       </button>
       |

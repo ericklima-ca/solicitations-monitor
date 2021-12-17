@@ -1,6 +1,6 @@
 <mat-card class="container-register">
   <div id="title-register">
-    <span *NgIf="message">{{ message }}</span>
+    <span *ngIf="message">{{ message }}</span>
     <mat-card-title> Registrar</mat-card-title>
   </div>
   <form (submit)="onRegister(form)" #form="ngForm">
@@ -19,7 +19,16 @@
     <div>
       <mat-form-field appearance="fill">
         <mat-label>E-mail</mat-label>
-        <input matInput type="email" ngModel required name="email" />
+        <input
+          matInput
+          type="email"
+          ngModel
+          required
+          name="email"
+          email
+          placeholder="example@email.com"
+        />
+        <mat-error *ngIf="content.invalid">O e-mail deve ser válido</mat-error>
       </mat-form-field>
     </div>
     <div>
@@ -48,17 +57,18 @@
           ngModel
           required
           minlength="3"
-          name="CenterID"
+          name="CenterId"
           #content="ngModel"
         />
-        <mat-error *ngIf="content.value == 102"
-          >O centro não pode ser 102</mat-error
-        >
+        <!-- TODO -->
+        <mat-error *ngIf="content.invalid">O centro não pode ser 102</mat-error>
+        <!---------->
       </mat-form-field>
     </div>
     <mat-divider></mat-divider>
     <div>
       <button
+        [disabled]="form.invalid ? true : false"
         class="btn-register"
         mat-raised-button
         color="primary"

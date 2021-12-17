@@ -8,7 +8,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+  message = '';
   constructor(public authService: AuthService, public router: Router) {}
 
   onLogin(form: NgForm) {
@@ -19,18 +20,12 @@ export class LoginComponent implements OnInit {
       id: form.value.id,
       password: form.value.password,
     });
-    this.authService.getUserToken().subscribe(token => {
-      if (token) {
-        this.router.navigate(['/'])
+    this.authService.getResponseSubject().subscribe((response) => {
+      if (response.token) {
+        this.router.navigate(['/']);
+      } else {
+        this.message = response.message;
       }
-    })
-  }
-
-  ngOnInit() {
-    this.authService.getUserToken().subscribe(token => {
-      if (token) {
-        this.router.navigate(['/'])
-      }
-    })
+    });
   }
 }

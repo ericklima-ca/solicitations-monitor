@@ -76,7 +76,7 @@
             },
             "development": {
               "browserTarget": "solicitations-monitor:build:development",
-              "port": 3000
+              "port": 3200
             }
           },
           "defaultConfiguration": "development"

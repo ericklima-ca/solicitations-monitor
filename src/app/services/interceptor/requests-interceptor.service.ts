@@ -17,14 +17,14 @@ export class RequestsInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.authService.getUserToken().subscribe((token) => {
-      this.token = token;
+    this.authService.getResponseSubject().subscribe((response) => {
+      this.token = response.token;
     });
     if (this.token) {
-      req = req.clone({
+      let reqCloned = req.clone({
         headers: req.headers.set('Authorization', 'Bearer ' + this.token),
       });
-      return next.handle(req);
+      return next.handle(reqCloned);
     }
     return next.handle(req);
   }
