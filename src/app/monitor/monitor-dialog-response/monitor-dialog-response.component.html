@@ -1,14 +1,31 @@
 <h1 mat-dialog-title>Confirmação de Resposta</h1>
 <mat-dialog-content>
-  <p>
-    Resposta: <b id="{{ data.response }}"> {{ data.response }} </b>
-  </p>
-  <p>Produto: {{ data.product }}</p>
-  <p>SKU: {{ data.sku }}</p>
-  <p>Quantidade: {{ data.amount }}</p>
+  <div>
+    <p><b>RESPOSTA</b></p>
+    <p>
+      <b id="{{ data.response }}"> {{ data.response }} </b>
+    </p>
+  </div>
+  <div>
+    <p><b>PRODUTO</b></p>
+    <p>
+      {{ data.product }}
+    </p>
+  </div>
+  <div>
+    <p><b>SKU</b></p>
+    <p>{{ data.sku }}</p>
+  </div>
+  <div>
+    <p><b>QUANTIDADE</b></p>
+    <p>
+      {{ data.amount }} pçs
+    </p>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button
+  (click)="onConfirm()"
     mat-raised-button
     color="primary"
     type="submit"
@@ -17,7 +34,8 @@
   >
     Confirmar
   </button>
-  <button mat-button color="warn" type="submit" mat-dialog-close>
+  <button
+  mat-button color="warn" type="submit" mat-dialog-close>
     Cancelar
   </button>
 </mat-dialog-actions>

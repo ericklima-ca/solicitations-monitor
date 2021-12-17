@@ -15,3 +15,13 @@
   padding-top: 20px;
   padding-bottom: auto;
 }
+
+mat-expansion-panel {
+  display: block;
+  margin-top: 2px;
+}
+.solicitation-container {
+  margin: auto;
+  display: block;
+  box-shadow: 2px 3px 4px rgb(165, 165, 165);
+}

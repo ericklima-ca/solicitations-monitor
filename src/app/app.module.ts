@@ -30,7 +30,7 @@ import { HistoryComponent } from './history/history.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { MonitorDialogResponseComponent } from './monitor/monitor-dialog-response/monitor-dialog-response.component';
-import { RequestsInterceptor } from './services/interceptor/requests-interceptor.service';
+import { RequestsInterceptor } from './services/requests-interceptor.service';
 
 @NgModule({
   declarations: [

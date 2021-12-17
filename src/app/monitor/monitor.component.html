@@ -1,6 +1,9 @@
 <mat-card-title>
   <div>
-    <h1>2 SOLICITAÇÕES PENDENTES NO CENTRO {{ center }}</h1>
+    <h1>
+      SOLICITAÇÕES PENDENTES: {{ amount }}<br />
+      CENTRO: {{ user.CenterId }}
+    </h1>
   </div>
 </mat-card-title>
 
@@ -10,7 +13,7 @@
       #{{ solicitation.id }} |
       {{ solicitation.product.description }}
     </mat-expansion-panel-header>
-    <mat-card>
+    <mat-card class="solicitation-container">
       <mat-card-title-group>
         <mat-card-title>{{ solicitation.product.description }}</mat-card-title>
         <mat-card-subtitle>
@@ -19,7 +22,7 @@
           {{ solicitation.product.ean }}
         </mat-card-subtitle>
         <img
-          mat-card-lg-image
+          mat-card-md-image
           [src]="solicitation.product.imageUrl"
           alt="Sem imagem"
         />
@@ -33,7 +36,7 @@
         <small>{{ solicitation.createdAt }}</small>
       </mat-card-content>
       <mat-divider inset></mat-divider>
-      <mat-card-actions>
+      <mat-card-actions *ngIf="user.CenterId != 102">
         <div class="action-response">
           <button
             mat-raised-button
@@ -46,6 +49,8 @@
             NTP
           </button>
         </div>
+      </mat-card-actions>
+      <mat-card-actions *ngIf="user.CenterId == 102">
         <div class="action-request">
           <button mat-button color="primary">EDITAR</button>
           <button mat-button color="warn">DELETAR</button>

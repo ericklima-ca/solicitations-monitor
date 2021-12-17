@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Solicitation } from '../../models';
-import { SolicitationService } from '../../services/solicitation/solicitation.service';
+import { SolicitationService } from '../../services/solicitation.service';
 
 @Component({
   selector: 'app-solicitation-create',

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Solicitation } from '../models';
 import { MatDialog } from '@angular/material/dialog';
 import { MonitorDialogResponseComponent } from './monitor-dialog-response/monitor-dialog-response.component';
-import { SolicitationService } from '../services/solicitation/solicitation.service';
+import { SolicitationService } from '../services/solicitation.service';
 
 @Component({
   selector: 'app-monitor',
@@ -18,6 +18,7 @@ export class MonitorComponent implements OnInit {
   openDialog(response: string) {
     const dialogRef = this.dialog.open(MonitorDialogResponseComponent, {
       data: {
+        SolicitationId: 1031313,
         product: 'SMARTPHONE MOTOROLA G20 VD',
         amount: 10,
         sku: '202021',
@@ -28,10 +29,9 @@ export class MonitorComponent implements OnInit {
       console.log(result);
     });
   }
-  center = '105';
   solicitations = [
     {
-      id: '1031313',
+      id: 1031313,
       order: '50500414',
       product: {
         ean: '745681213456465123213',
@@ -88,6 +88,10 @@ export class MonitorComponent implements OnInit {
       createdAt: '2021-05-20 12:29:11',
     },
   ];
+  amount = this.solicitations.length;
+  user = {
+    CenterId: 105,
+  };
 
   ngOnInit() {}
 }
