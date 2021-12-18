@@ -55,3 +55,8 @@ export interface RegisterForm {
   CenterId: number;
   password: string;
 }
+
+export interface AuthUser {
+  id: number;
+  CenterId: number;
+}

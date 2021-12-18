@@ -2,7 +2,7 @@
   <div>
     <h1>
       SOLICITAÇÕES PENDENTES: {{ amount }}<br />
-      CENTRO: {{ user.CenterId }}
+      CENTRO: {{ user?.CenterId }}
     </h1>
   </div>
 </mat-card-title>
@@ -36,7 +36,7 @@
         <small>{{ solicitation.createdAt }}</small>
       </mat-card-content>
       <mat-divider inset></mat-divider>
-      <mat-card-actions *ngIf="user.CenterId != 102">
+      <mat-card-actions *ngIf="user?.CenterId != 102">
         <div class="action-response">
           <button
             mat-raised-button
@@ -50,7 +50,7 @@
           </button>
         </div>
       </mat-card-actions>
-      <mat-card-actions *ngIf="user.CenterId == 102">
+      <mat-card-actions *ngIf="user?.CenterId == 102">
         <div class="action-request">
           <button mat-button color="primary">EDITAR</button>
           <button mat-button color="warn">DELETAR</button>
@@ -59,6 +59,6 @@
     </mat-card>
   </mat-expansion-panel>
 </mat-accordion>
-<a routerLink="create" class="float">
+<a routerLink="create" class="float" *ngIf="user?.CenterId == 102">
   <mat-icon class="btn-float">add</mat-icon>
 </a>

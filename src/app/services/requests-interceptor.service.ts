@@ -5,27 +5,25 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable()
 export class RequestsInterceptor implements HttpInterceptor {
-  token?: string;
-  constructor(public authService: AuthService, public router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.authService.getResponseSubject().subscribe((response) => {
-      this.token = response.token;
-    });
-    if (this.token) {
-      let reqCloned = req.clone({
-        headers: req.headers.set('Authorization', 'Bearer ' + this.token),
+    const token = this.authService.token;
+    if (token) {
+      const interceptedReq = req.clone({
+        headers: req.headers.set('Authorization', 'Bearer ' + token),
       });
-      return next.handle(reqCloned);
+      return next.handle(interceptedReq);
+    } else {
+      return next.handle(req);
     }
-    return next.handle(req);
   }
 }

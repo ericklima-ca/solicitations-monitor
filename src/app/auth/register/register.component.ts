@@ -27,7 +27,8 @@ export class RegisterComponent implements OnInit {
       CenterId: CenterId,
       email: email,
     };
-    this.message = this.authService.singup(registerData);
+    this.authService.singup(registerData);
+    this.message = this.authService.message;
   }
 
   ngOnInit() {}

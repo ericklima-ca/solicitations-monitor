@@ -18,14 +18,12 @@
   </div>
   <div>
     <p><b>QUANTIDADE</b></p>
-    <p>
-      {{ data.amount }} pçs
-    </p>
+    <p>{{ data.amount }} pçs</p>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button
-  (click)="onConfirm()"
+    (click)="onConfirm()"
     mat-raised-button
     color="primary"
     type="submit"
@@ -34,8 +32,7 @@
   >
     Confirmar
   </button>
-  <button
-  mat-button color="warn" type="submit" mat-dialog-close>
+  <button mat-button color="warn" type="submit" mat-dialog-close>
     Cancelar
   </button>
 </mat-dialog-actions>

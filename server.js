@@ -4,7 +4,7 @@ const app = express();
 
 app.use("/", express.static("./dist/solicitations-monitor"));
 
-app.get("/*", (req, res) => {
+app.get("/*", (_, res) => {
   res.sendFile("./dist/solicitations-monitor/index.html");
 });
 

@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  message = '';
+  message?: string;
   constructor(public authService: AuthService, public router: Router) {}
 
   onLogin(form: NgForm) {
@@ -20,12 +20,10 @@ export class LoginComponent {
       id: form.value.id,
       password: form.value.password,
     });
-    this.authService.getResponseSubject().subscribe((response) => {
-      if (response.token) {
-        this.router.navigate(['/']);
-      } else {
-        this.message = response.message;
-      }
-    });
+    if (this.authService.token) {
+      this.router.navigate(['/']);
+    } else {
+      this.message = '';
+    }
   }
 }

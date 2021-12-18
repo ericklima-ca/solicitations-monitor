@@ -7,7 +7,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 
 const routes: Routes = [
-  { path: '', component: MonitorComponent },
+  { path: '', component: MonitorComponent, canActivate: [] },
   { path: 'register', component: RegisterComponent },
   { path: 'create', component: SolicitationCreateComponent },
   { path: 'login', component: LoginComponent },

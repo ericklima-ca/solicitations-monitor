@@ -4,7 +4,7 @@
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="reload()">
         <mat-icon>refresh</mat-icon>
         <span>Atualizar</span>
       </button>
@@ -15,12 +15,34 @@
       /></a>
     </span>
     <span class="spacer"></span>
-    <a mat-button routerLink="/history" routerLinkActive="mat-primary"
+    <a
+      *ngIf="isAuth"
+      mat-button
+      routerLink="/history"
+      routerLinkActive="mat-primary"
       >Histórico</a
     >
-    <a mat-button routerLink="/login" routerLinkActive="mat-primary">Login</a>
-    <a mat-button routerLink="/register" routerLinkActive="mat-primary"
+    <a
+      *ngIf="!isAuth"
+      mat-button
+      routerLink="/login"
+      routerLinkActive="mat-primary"
+      >Login</a
+    >
+    <a
+      *ngIf="!isAuth"
+      mat-button
+      routerLink="/register"
+      routerLinkActive="mat-primary"
       >Registrar</a
+    >
+    <a
+      *ngIf="isAuth"
+      (click)="onLogout()"
+      mat-button
+      routerLink="/logout"
+      routerLinkActive="mat-primary"
+      >Sair</a
     >
   </mat-toolbar>
 </div>
