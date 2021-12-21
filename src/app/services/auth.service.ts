@@ -12,7 +12,7 @@ interface ResponseData {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  authUser?: AuthUser;
+  private authUser?: AuthUser;
   private responseData: ResponseData = {};
   private authenticationSubject = new Subject<boolean>();
 
@@ -42,6 +42,10 @@ export class AuthService {
 
   get message() {
     return this.responseData.message;
+  }
+
+  get user() {
+    return this.authUser;
   }
 
   logout() {

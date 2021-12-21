@@ -40,7 +40,7 @@ export class MonitorComponent implements OnInit, OnDestroy {
   amount = solicitations.length;
 
   ngOnInit() {
-    this.user = this.authService.authUser;
+    this.user = this.authService.user;
     this.authSubs = this.authService.authSubject.subscribe((auth) => {
       if (!auth) {
         this.user = undefined;
