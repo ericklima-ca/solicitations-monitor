@@ -4,13 +4,16 @@
       <small>{{ message }}</small>
     </div>
     <div>
-      <mat-card-title> Login </mat-card-title>
+      <mat-card-title> Entrar </mat-card-title>
     </div>
     <form (submit)="onLogin(form)" #form="ngForm">
       <div>
         <mat-form-field appearance="fill">
           <mat-label>Matrícula</mat-label>
           <input matInput type="number" name="id" ngModel required />
+          <mat-error *ngIf="form.invalid"
+            >Digite uma matrícula válida</mat-error
+          >
         </mat-form-field>
       </div>
       <div>
@@ -24,6 +27,7 @@
             required
             minlength="6"
           />
+          <mat-error *ngIf="form.invalid">Digite uma senha válida</mat-error>
         </mat-form-field>
       </div>
       <mat-divider class="divider"></mat-divider>

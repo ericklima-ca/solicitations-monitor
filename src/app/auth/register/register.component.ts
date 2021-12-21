@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RegisterForm } from 'src/app/models';
 import { AuthService } from '../../services/auth.service';
-import { SolicitationService } from 'src/app/services/solicitation.service';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +10,7 @@ import { SolicitationService } from 'src/app/services/solicitation.service';
 })
 export class RegisterComponent implements OnInit {
   message?: string;
+  isCenterInvalid = false;
 
   constructor(public authService: AuthService) {}
 

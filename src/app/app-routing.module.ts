@@ -5,7 +5,7 @@ import { MonitorComponent } from './monitor/monitor.component';
 import { SolicitationCreateComponent } from './solicitations/solicitation-create/solicitation-create.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { AuthGuard } from './services/auth.gard';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: '', component: MonitorComponent, canActivate: [AuthGuard] },
@@ -22,5 +22,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [AuthGuard],
 })
 export class AppRoutingModule {}

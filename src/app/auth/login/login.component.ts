@@ -23,7 +23,7 @@ export class LoginComponent {
     if (this.authService.token) {
       this.router.navigate(['/']);
     } else {
-      this.message = '';
+      this.message = 'Usuário ou senha incorretos';
     }
   }
 }

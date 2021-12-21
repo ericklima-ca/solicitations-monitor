@@ -58,10 +58,11 @@
           required
           minlength="3"
           name="CenterId"
-          #content="ngModel"
+          #center="ngModel"
+          pattern="^((?!102).)*$"
         />
         <!-- TODO -->
-        <mat-error *ngIf="content.invalid">O centro não pode ser 102</mat-error>
+        <mat-error *ngIf="center.invalid">O centro não pode ser 102</mat-error>
         <!---------->
       </mat-form-field>
     </div>
