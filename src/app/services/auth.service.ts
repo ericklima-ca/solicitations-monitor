@@ -13,7 +13,7 @@ interface ResponseData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private authUser?: AuthUser;
-  private responseData: ResponseData = {};
+  private authToken?: string;
   private authenticationSubject = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -21,15 +21,47 @@ export class AuthService {
   login(loginForm: LoginForm) {
     this.http
       .post<ResponseData>('http://localhost:3000/api/auth/login', loginForm)
+      .subscribe({
+        next: (response) => {
+          if (response.token && response.user) {
+            this.saveAuth(response.token, response.user);
+            this.authenticationSubject.next(true);
+            this.router.navigate(['/']);
+          }
+        },
+        error: () => {
+          this.authenticationSubject.next(false);
+        },
+      });
+  }
+
+  logout() {
+    this.delelteAuth();
+    this.authenticationSubject.next(false);
+    this.router.navigate(['/login']);
+  }
+
+  singup(registerForm: RegisterForm) {
+    this.http
+      .post<{ error: boolean; message: string }>(
+        'http://localhost:3000/api/auth/signup',
+        registerForm
+      )
       .subscribe((response) => {
-        const token = response.token;
-        if (token) {
-          this.authUser = response.user;
-          this.responseData.token = token;
-          this.authenticationSubject.next(true);
-          this.router.navigate(['/']);
+        if (!response.error) {
         }
       });
+  }
+
+  verifyAuth() {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    if (!token || !user) {
+      return;
+    }
+    this.authToken = token;
+    this.authUser = JSON.parse(user);
+    this.authenticationSubject.next(true);
   }
 
   get authSubject() {
@@ -37,32 +69,23 @@ export class AuthService {
   }
 
   get token() {
-    return this.responseData.token;
-  }
-
-  get message() {
-    return this.responseData.message;
+    return this.authToken;
   }
 
   get user() {
     return this.authUser;
   }
 
-  logout() {
-    this.responseData.token = undefined;
-    this.authUser = undefined;
-    this.authenticationSubject.next(false);
-    this.router.navigate(['/login']);
+  private saveAuth(token: string, user: AuthUser) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.authUser = user;
+    this.authToken = token;
   }
-
-  singup(registerForm: RegisterForm) {
-    this.http
-      .post<{ message: string }>(
-        'http://localhost:3000/api/auth/signup',
-        registerForm
-      )
-      .subscribe((response) => {
-        this.responseData.message = response.message;
-      });
+  private delelteAuth() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.authToken = undefined;
+    this.authUser = undefined;
   }
 }
