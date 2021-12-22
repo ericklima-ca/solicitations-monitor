@@ -13,10 +13,14 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
+    if (this.authService.token) {
+      this.isAuth = true;
+    }
     this.authSubs = this.authService.authSubject.subscribe((isAuth) => {
       this.isAuth = isAuth;
     });
   }
+
   ngOnDestroy(): void {
     this.authSubs.unsubscribe();
   }

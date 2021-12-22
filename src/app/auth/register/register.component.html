@@ -1,6 +1,8 @@
 <mat-card class="container-register">
+  <div class="signup-message" *ngIf="message">
+    <mat-icon>info</mat-icon> <small>{{ message }}</small>
+  </div>
   <div id="title-register">
-    <span *ngIf="message">{{ message }}</span>
     <mat-card-title> Registrar</mat-card-title>
   </div>
   <form (submit)="onRegister(form)" #form="ngForm">

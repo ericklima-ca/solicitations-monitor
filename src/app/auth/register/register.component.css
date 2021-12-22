@@ -10,3 +10,8 @@ mat-form-field {
 .btn-register {
   margin-top: 1rem;
 }
+
+.signup-message {
+  color: rgb(128, 0, 187);
+  margin: 1rem 0 1rem 0;
+}

@@ -10,7 +10,6 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   message?: string;
-  isCenterInvalid = false;
 
   constructor(public authService: AuthService) {}
 
@@ -28,7 +27,8 @@ export class RegisterComponent implements OnInit {
       email: email,
     };
     this.authService.singup(registerData);
-    this.message = this.authService.message;
+    this.message =
+      'Verifique seu e-mail em até 60 minutos e clique no link de confirmação.';
   }
 
   ngOnInit() {}

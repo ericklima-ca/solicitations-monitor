@@ -6,22 +6,27 @@ import { SolicitationCreateComponent } from './solicitations/solicitation-create
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthGuard } from './services/auth.guard';
+import { NonAuthGuard } from './services/non-auth.guard';
 
 const routes: Routes = [
   { path: '', component: MonitorComponent, canActivate: [AuthGuard] },
-  { path: 'register', component: RegisterComponent },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [NonAuthGuard],
+  },
+  { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
   {
     path: 'create',
     component: SolicitationCreateComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'login', component: LoginComponent },
   //  { path: 'history', component: HistoryComponent },
   { path: '**', redirectTo: '' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard],
+  providers: [AuthGuard, NonAuthGuard],
 })
 export class AppRoutingModule {}

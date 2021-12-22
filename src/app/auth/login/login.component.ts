@@ -20,10 +20,12 @@ export class LoginComponent {
       id: form.value.id,
       password: form.value.password,
     });
-    if (this.authService.token) {
-      this.router.navigate(['/']);
-    } else {
-      this.message = 'Usuário ou senha incorretos';
-    }
+    this.authService.authSubject.subscribe((auth) => {
+      if (auth) {
+        this.router.navigate(['/']);
+      } else {
+        this.message = 'Matrícula ou senha incorreta';
+      }
+    });
   }
 }
