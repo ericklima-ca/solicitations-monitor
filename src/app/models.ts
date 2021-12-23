@@ -18,12 +18,14 @@ export interface User {
 export interface Solicitation {
   id: number | null;
   order: string | null;
-  product: Product;
+  Product: Product;
   amount: number;
-  center: Center;
-  user: User;
-  createddAt: string;
+  Center: Center;
+  User: User;
+  createdAt: string;
   updatedAt: string;
+  obs: string;
+  status: string;
 }
 
 export interface Center {

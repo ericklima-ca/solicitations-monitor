@@ -1,5 +1,5 @@
-<mat-card-title>
-  <div>
+<mat-card-title class="container-header">
+  <div class="header-info">
     <h1>
       SOLICITAÇÕES PENDENTES: {{ amount }}<br />
       CENTRO: {{ user?.CenterId }}
@@ -7,23 +7,23 @@
   </div>
 </mat-card-title>
 
-<mat-accordion *ngFor="let solicitation of solicitations; index as i">
+<mat-accordion *ngFor="let solicitation of solicitations">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       #{{ solicitation.id }} |
-      {{ solicitation.product.description }}
+      {{ solicitation.Product.description }}
     </mat-expansion-panel-header>
     <mat-card class="solicitation-container">
       <mat-card-title-group>
-        <mat-card-title>{{ solicitation.product.description }}</mat-card-title>
+        <mat-card-title>{{ solicitation.Product.description }}</mat-card-title>
         <mat-card-subtitle>
-          {{ solicitation.product.sku }}
+          {{ solicitation.Product.id }}
           |
-          {{ solicitation.product.ean }}
+          {{ solicitation.Product.ean }}
         </mat-card-subtitle>
         <img
           mat-card-md-image
-          [src]="solicitation.product.imageUrl"
+          [src]="solicitation.Product.imageUrl"
           alt="Sem imagem"
         />
       </mat-card-title-group>
@@ -32,7 +32,10 @@
           Quantidade: <b>{{ solicitation.amount }}</b> pç.
         </p>
         <p>Ordem: {{ solicitation.order }}</p>
-        <p>Por: {{ solicitation.user.name }}</p>
+        <p *ngIf="user?.CenterId == 102">
+          Centro: {{ solicitation.Center.id }}
+        </p>
+        <p>Por: {{ solicitation.User.name }}</p>
         <small>{{ solicitation.createdAt }}</small>
       </mat-card-content>
       <mat-divider inset></mat-divider>
@@ -41,11 +44,15 @@
           <button
             mat-raised-button
             color="primary"
-            (click)="openDialog('CONFIRMADO')"
+            (click)="openDialog('CONFIRMADO', solicitation)"
           >
             CONFIRMADO
           </button>
-          <button mat-button color="warn" (click)="openDialog('NTP')">
+          <button
+            mat-button
+            color="warn"
+            (click)="openDialog('NTP', solicitation)"
+          >
             NTP
           </button>
         </div>

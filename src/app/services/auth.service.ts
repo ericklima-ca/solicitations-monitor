@@ -5,9 +5,10 @@ import { Subject } from 'rxjs';
 import { LoginForm, RegisterForm, AuthUser } from 'src/app/models';
 
 interface ResponseData {
+  ok?: boolean;
   token?: string;
-  message?: string;
   user?: AuthUser;
+  message?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -43,12 +44,12 @@ export class AuthService {
 
   singup(registerForm: RegisterForm) {
     this.http
-      .post<{ error: boolean; message: string }>(
+      .post<{ ok: boolean; message: string }>(
         'http://localhost:3000/api/auth/signup',
         registerForm
       )
       .subscribe((response) => {
-        if (!response.error) {
+        if (response.ok) {
         }
       });
   }

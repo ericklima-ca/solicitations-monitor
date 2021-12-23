@@ -16,12 +16,23 @@
   padding-bottom: auto;
 }
 
-mat-expansion-panel {
+mat-expansion-panel,
+mat-card {
   display: block;
   margin-top: 2px;
+  margin-bottom: 2px;
 }
 .solicitation-container {
   margin: auto;
   display: block;
   box-shadow: 2px 3px 4px rgb(165, 165, 165);
+}
+
+.container-header {
+  text-align: center;
+  border: solid 1px rgb(201, 201, 201);
+  box-shadow: 2px 3px 4px rgb(165, 165, 165);
+}
+.header-info {
+  margin: 1% 0 0 0;
 }

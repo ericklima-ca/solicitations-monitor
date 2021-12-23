@@ -7,6 +7,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthGuard } from './services/auth.guard';
 import { NonAuthGuard } from './services/non-auth.guard';
+import { AuthCenterGuard } from './services/auth-center.guard';
 
 const routes: Routes = [
   { path: '', component: MonitorComponent, canActivate: [AuthGuard] },
@@ -19,7 +20,7 @@ const routes: Routes = [
   {
     path: 'create',
     component: SolicitationCreateComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthCenterGuard],
   },
   //  { path: 'history', component: HistoryComponent },
   { path: '**', redirectTo: '' },
@@ -27,6 +28,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard, NonAuthGuard],
+  providers: [AuthGuard, NonAuthGuard, AuthCenterGuard],
 })
 export class AppRoutingModule {}
