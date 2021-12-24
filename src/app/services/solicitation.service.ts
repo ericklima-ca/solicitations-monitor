@@ -92,6 +92,10 @@ export class SolicitationService {
       });
   }
 
+  editSolicitation(solicitationId: number, newAmount: number) {
+    this.http.put('http://localhost:3000/api/solicitations/edit' + solicitationId + '/edit', newAmount).subscribe();
+  }
+
   private _formatTimestamp(ts: string) {
     const date = new Date(ts).toLocaleDateString();
     const time = new Date(ts).toLocaleTimeString();
