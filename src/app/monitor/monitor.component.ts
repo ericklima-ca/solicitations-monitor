@@ -5,6 +5,8 @@ import { MonitorDialogResponseComponent } from './monitor-dialog-response/monito
 import { SolicitationService } from '../services/solicitation.service';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
+import { MonitorEditDialog } from './monitor-edit-dialog/monitor-edit-dialog.component';
 
 @Component({
   selector: 'app-monitor',
@@ -56,5 +58,14 @@ export class MonitorComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.authSubs.unsubscribe();
     this.solicitationSubs.unsubscribe();
+  }
+
+  openEditDialog(solicitation: Solicitation) {
+    const dialogRef = this.dialog.open(MonitorEditDialog, {
+      data: {
+        ... solicitation
+      }
+    });
+    dialogRef.afterClosed().subscribe();
   }
 }

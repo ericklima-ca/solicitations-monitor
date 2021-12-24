@@ -59,8 +59,14 @@
       </mat-card-actions>
       <mat-card-actions *ngIf="user?.CenterId == 102">
         <div class="action-request">
-          <button mat-button color="primary">EDITAR</button>
-          <button mat-button color="warn">DELETAR</button>
+          <button (click)="openEditDialog(solicitation)" mat-button color="primary">EDITAR</button>
+          <button 
+          *ngIf="user?.CenterId === solicitation.Center.id"
+          mat-button
+          color="warn"
+          >
+          DELETAR
+        </button>
         </div>
       </mat-card-actions>
     </mat-card>

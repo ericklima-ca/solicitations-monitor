@@ -33,6 +33,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { MonitorDialogResponseComponent } from './monitor/monitor-dialog-response/monitor-dialog-response.component';
 import { RequestsInterceptor } from './services/requests-interceptor.service';
 import { SolicitationCreateDialog } from './solicitations/solicitation-create/solicitation-create-dialog/solicitation-create-dialog.component';
+import { MonitorEditDialog } from './monitor/monitor-edit-dialog/monitor-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import { SolicitationCreateDialog } from './solicitations/solicitation-create/so
     LoginComponent,
     RegisterComponent,
     MonitorDialogResponseComponent,
+    MonitorEditDialog,
     SolicitationCreateDialog,
+    
   ],
   imports: [
     BrowserModule,
