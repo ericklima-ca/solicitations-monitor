@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Solicitation } from '../../models';
+import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
+import { Center, Product, Solicitation } from '../../models';
 import { SolicitationService } from '../../services/solicitation.service';
+import { SolicitationCreateDialog } from './solicitation-create-dialog/solicitation-create-dialog.component';
 
 @Component({
   selector: 'app-solicitation-create',
@@ -9,16 +12,24 @@ import { SolicitationService } from '../../services/solicitation.service';
   styleUrls: ['./solicitation-create.component.css'],
 })
 export class SolicitationCreateComponent {
-  constructor(private solicitationService: SolicitationService) {}
+  dataToNew = new Subscription();
+  products!: Product[];
+  centers!: Center[];
+  constructor(
+    private solicitationService: SolicitationService,
+    public dialog: MatDialog
+  ) {}
 
-  onCreateSolicitation(form: NgForm) {
-    if (form.invalid) {
-      return;
-    }
-
-    let { order, sku, product, amount, center } = form.value;
-
-    // this.solicitationService.createSolicitation({ order, product, product, amount, center });
-    // form.resetForm();
+  openDialog(form: NgForm) {
+    const dialogRef = this.dialog.open(SolicitationCreateDialog, {
+      data: {
+        ...form.value,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'ok') {
+        form.resetForm();
+      }
+    });
   }
 }

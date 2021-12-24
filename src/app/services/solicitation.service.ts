@@ -4,13 +4,20 @@ import { Subject, map } from 'rxjs';
 import { Center, Product, Solicitation } from 'src/app/models';
 import { AuthService } from './auth.service';
 
+interface PostSolicitation {
+  order: number;
+  amount: number;
+  CenterId: number;
+  ProductId: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class SolicitationService {
   private solicitations!: Solicitation[];
   private solicitationsSubject = new Subject<Solicitation[]>();
-  // url: string = `https://${process.env['HEROKU_APP_NAME']}.herokuapp.com`;
+  productSubject = new Subject<{ ok: boolean; product: Product | undefined }>();
 
   constructor(public http: HttpClient, private authService: AuthService) {}
 
@@ -30,8 +37,8 @@ export class SolicitationService {
               id: solicitation.id,
               amount: solicitation.amount,
               order: solicitation.order,
-              createdAt: this._formatTimeStamp(solicitation.createdAt),
-              updatedAt: this._formatTimeStamp(solicitation.updatedAt),
+              createdAt: this._formatTimestamp(solicitation.createdAt),
+              updatedAt: this._formatTimestamp(solicitation.updatedAt),
               Product: solicitation.Product,
               User: solicitation.User,
               Center: solicitation.Center,
@@ -54,13 +61,38 @@ export class SolicitationService {
       });
   }
 
-  createSolicitation(solicitation: Solicitation) {
+  getProduct(productId: number) {
     this.http
-      .post<{}>('http://localhost:3000/api/solicitations/new', solicitation)
-      .subscribe(() => {});
+      .get<{ ok: boolean; message: { product: Product } }>(
+        'http://localhost:3000/api/solicitations/new/' + productId
+      )
+      .subscribe({
+        next: (response) => {
+          this.productSubject.next({
+            ok: true,
+            product: response.message.product,
+          });
+        },
+        error: () => {
+          this.productSubject.next({ ok: false, product: undefined });
+        },
+      });
   }
 
-  private _formatTimeStamp(ts: string) {
+  createSolicitation(solicitation: PostSolicitation) {
+    this.http
+      .post<{ ok: boolean; message: string }>(
+        'http://localhost:3000/api/solicitations/new',
+        solicitation
+      )
+      .subscribe({
+        error: (response) => {
+          console.log(response);
+        },
+      });
+  }
+
+  private _formatTimestamp(ts: string) {
     const date = new Date(ts).toLocaleDateString();
     const time = new Date(ts).toLocaleTimeString();
     return `${date} ${time}`;

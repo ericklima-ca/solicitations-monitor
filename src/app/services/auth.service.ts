@@ -48,10 +48,7 @@ export class AuthService {
         'http://localhost:3000/api/auth/signup',
         registerForm
       )
-      .subscribe((response) => {
-        if (response.ok) {
-        }
-      });
+      .subscribe();
   }
 
   verifyAuth() {

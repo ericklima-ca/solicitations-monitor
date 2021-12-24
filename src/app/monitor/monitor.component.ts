@@ -3,10 +3,8 @@ import { Solicitation, AuthUser } from '../models';
 import { MatDialog } from '@angular/material/dialog';
 import { MonitorDialogResponseComponent } from './monitor-dialog-response/monitor-dialog-response.component';
 import { SolicitationService } from '../services/solicitation.service';
-import { solicitations } from './_helper.dev';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
-import { response } from 'express';
 
 @Component({
   selector: 'app-monitor',
@@ -36,9 +34,7 @@ export class MonitorComponent implements OnInit, OnDestroy {
         response: response,
       },
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-    });
+    dialogRef.afterClosed().subscribe();
   }
 
   ngOnInit() {

@@ -17,6 +17,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -31,6 +32,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { MonitorDialogResponseComponent } from './monitor/monitor-dialog-response/monitor-dialog-response.component';
 import { RequestsInterceptor } from './services/requests-interceptor.service';
+import { SolicitationCreateDialog } from './solicitations/solicitation-create/solicitation-create-dialog/solicitation-create-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { RequestsInterceptor } from './services/requests-interceptor.service';
     LoginComponent,
     RegisterComponent,
     MonitorDialogResponseComponent,
+    SolicitationCreateDialog,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,7 @@ import { RequestsInterceptor } from './services/requests-interceptor.service';
     MatTableModule,
     MatSelectModule,
     MatDialogModule,
+    MatAutocompleteModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestsInterceptor, multi: true },
