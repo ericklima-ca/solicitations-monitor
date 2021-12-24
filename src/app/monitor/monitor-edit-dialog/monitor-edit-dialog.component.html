@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Editar Solicitação</h1>
+<mat-dialog-content>
+    <div>
+        <p>{{data.id}}</p>
+    </div>
+    <div>
+        <p>{{data.Product.id}}</p>
+    </div>
+    <div>
+        <p>{{data.Product.description}}</p>
+    </div>
+    <form #form="ngForm">
+        <mat-form-field>
+            <mat-label>Quantidade</mat-label>
+            <input matInput name="amount" [value]="data.amount" number>
+            <mat-hint>Alterar quantidade</mat-hint>
+        </mat-form-field>
+        <button
+        mat-raised-button
+        color="primary"
+        (click)="editSolicitation(form.value.amount)"
+        [disabled]="form.value.amount == data.amount ? true : false">
+            ALTERAR
+        </button>
+    </form>
+</mat-dialog-content>
