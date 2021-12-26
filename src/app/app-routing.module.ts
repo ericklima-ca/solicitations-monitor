@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-// import { HistoryComponent } from './history/history.component';
+
+import { HistoryComponent } from './history/history.component';
 import { MonitorComponent } from './monitor/monitor.component';
 import { SolicitationCreateComponent } from './solicitations/solicitation-create/solicitation-create.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -22,7 +23,7 @@ const routes: Routes = [
     component: SolicitationCreateComponent,
     canActivate: [AuthGuard, AuthCenterGuard],
   },
-  //  { path: 'history', component: HistoryComponent },
+  { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' },
 ];
 @NgModule({

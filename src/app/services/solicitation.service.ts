@@ -15,8 +15,9 @@ interface PostSolicitation {
   providedIn: 'root',
 })
 export class SolicitationService {
-  private solicitations!: Solicitation[];
+  private solicitations: Solicitation[] = [];
   private solicitationsSubject = new Subject<Solicitation[]>();
+
   productSubject = new Subject<{ ok: boolean; product: Product | undefined }>();
 
   constructor(public http: HttpClient, private authService: AuthService) {}
@@ -81,24 +82,41 @@ export class SolicitationService {
 
   createSolicitation(solicitation: PostSolicitation) {
     this.http
-      .post<{ ok: boolean; message: string }>(
+      .post<{ ok: boolean; message: string; solicitation: Solicitation }>(
         'http://localhost:3000/api/solicitations/new',
         solicitation
       )
       .subscribe({
-        error: (response) => {
-          console.log(response);
+        next: (_) => {
+          this.getSolicitations();
+        },
+        error: (error) => {
+          console.log(error);
         },
       });
   }
 
-  editSolicitation(solicitationId: number, newAmount: number) {
-    this.http.put('http://localhost:3000/api/solicitations/edit' + solicitationId + '/edit', newAmount).subscribe();
+  editSolicitation(
+    solicitationId: number | null,
+    newAmount: { amount: number }
+  ) {
+    return this.http.put(
+      'http://localhost:3000/api/solicitations/edit/' +
+        solicitationId +
+        '/edit',
+      newAmount
+    );
   }
 
   private _formatTimestamp(ts: string) {
     const date = new Date(ts).toLocaleDateString();
     const time = new Date(ts).toLocaleTimeString();
     return `${date} ${time}`;
+  }
+
+  deleteSolicitation(solicitationId: number | null) {
+    return this.http.delete(
+      'http://localhost:3000/api/solicitations/delete/' + solicitationId
+    );
   }
 }

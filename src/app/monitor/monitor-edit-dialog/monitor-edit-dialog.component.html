@@ -1,26 +1,46 @@
-<h1 mat-dialog-title>Editar Solicitação</h1>
-<mat-dialog-content>
+<h1 mat-dialog-title>Editar Solicitação #{{ data.id }}</h1>
+<mat-dialog-content *ngIf="responseMessage">
+  <p>Solicitação alterada</p>
+</mat-dialog-content>
+<mat-dialog-content *ngIf="!responseMessage">
+  <div>
+    <p>
+      <b> SKU: </b> <br />
+      {{ data.Product.id }}
+    </p>
+  </div>
+  <div>
+    <p>
+      <b> PRODUTO: </b><br />
+      {{ data.Product.description }}
+    </p>
+  </div>
+  <form #form="ngForm">
     <div>
-        <p>{{data.id}}</p>
+      <mat-form-field>
+        <mat-label>Quantidade</mat-label>
+        <input
+          matInput
+          name="amount"
+          placeholder="{{ data.amount }}"
+          number
+          ngModel
+        />
+        <mat-hint>Alterar quantidade</mat-hint>
+      </mat-form-field>
     </div>
     <div>
-        <p>{{data.Product.id}}</p>
-    </div>
-    <div>
-        <p>{{data.Product.description}}</p>
-    </div>
-    <form #form="ngForm">
-        <mat-form-field>
-            <mat-label>Quantidade</mat-label>
-            <input matInput name="amount" [value]="data.amount" number>
-            <mat-hint>Alterar quantidade</mat-hint>
-        </mat-form-field>
-        <button
+      <button
         mat-raised-button
         color="primary"
         (click)="editSolicitation(form.value.amount)"
-        [disabled]="form.value.amount == data.amount ? true : false">
-            ALTERAR
-        </button>
-    </form>
+        [disabled]="
+          (form.value.amount == data.amount ? true : false) ||
+          !form.value.amount
+        "
+      >
+        ALTERAR
+      </button>
+    </div>
+  </form>
 </mat-dialog-content>

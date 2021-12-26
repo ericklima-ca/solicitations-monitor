@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MonitorDialogResponseComponent } from './monitor-dialog-response/monitor-dialog-response.component';
 import { SolicitationService } from '../services/solicitation.service';
 import { AuthService } from '../services/auth.service';
-import { Subscription } from 'rxjs';
+import { from, Observable, of, Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { MonitorEditDialog } from './monitor-edit-dialog/monitor-edit-dialog.component';
 
@@ -17,7 +17,7 @@ export class MonitorComponent implements OnInit, OnDestroy {
   user?: AuthUser;
   authSubs = new Subscription();
   solicitationSubs = new Subscription();
-  solicitations?: Solicitation[];
+  solicitations: Solicitation[] = [];
   amount = 0;
 
   constructor(
@@ -25,7 +25,6 @@ export class MonitorComponent implements OnInit, OnDestroy {
     public solicitationService: SolicitationService,
     public authService: AuthService
   ) {}
-
   openDialog(response: string, solicitation: Solicitation) {
     const dialogRef = this.dialog.open(MonitorDialogResponseComponent, {
       data: {
@@ -47,12 +46,15 @@ export class MonitorComponent implements OnInit, OnDestroy {
       }
     });
     this.solicitationService.getSolicitations();
-    this.solicitationService.subject.subscribe((solicitations) => {
-      console.log(solicitations);
-      this.solicitations = solicitations.reverse();
-      this.amount = this.solicitations.length;
-      console.log(this.solicitations);
-    });
+    this.solicitationSubs = this.solicitationService.subject.subscribe(
+      (solicitations) => {
+        this.solicitations = solicitations.reverse();
+        this.amount = this.solicitations.length;
+      }
+    );
+    setInterval(() => {
+      this.solicitationService.getSolicitations();
+    }, 1000 * 60 * 120);
   }
 
   ngOnDestroy(): void {
@@ -63,9 +65,20 @@ export class MonitorComponent implements OnInit, OnDestroy {
   openEditDialog(solicitation: Solicitation) {
     const dialogRef = this.dialog.open(MonitorEditDialog, {
       data: {
-        ... solicitation
-      }
+        ...solicitation,
+      },
     });
     dialogRef.afterClosed().subscribe();
+  }
+
+  onDeleteSolicitation(solicitation: Solicitation) {
+    if (confirm(`Deletar solicitação #${solicitation.id}?`)) {
+      this.solicitationService
+        .deleteSolicitation(solicitation.id)
+        .subscribe(() => {
+          alert(`Solicitação #${solicitation.id} deletada`);
+          this.solicitationService.getSolicitations();
+        });
+    }
   }
 }

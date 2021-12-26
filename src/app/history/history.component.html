@@ -9,28 +9,34 @@
     *ngFor="let column of columnsToDisplay"
   >
     <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
-    <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+    <td mat-cell *matCellDef="let solicitation">{{ solicitation[column] }}</td>
   </ng-container>
 
   <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
   <ng-container matColumnDef="expandedDetail">
     <td
       mat-cell
-      *matCellDef="let element"
+      *matCellDef="let solicitation"
       [attr.colspan]="columnsToDisplay.length"
     >
       <div
         class="example-element-detail"
-        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
+        [@detailExpand]="
+          solicitation == expandedSolicitation ? 'expanded' : 'collapsed'
+        "
       >
         <div class="example-element-diagram">
-          <div class="example-element-position">{{ element.position }}</div>
-          <div class="example-element-symbol">{{ element.symbol }}</div>
-          <div class="example-element-name">{{ element.name }}</div>
-          <div class="example-element-weight">{{ element.weight }}</div>
+          <div class="example-element-position">
+            {{ solicitation.id }}
+          </div>
+          <div class="example-element-symbol">{{ solicitation.sku }}</div>
+          <div class="example-element-name">{{ solicitation.produto }}</div>
+          <div class="example-element-weight">
+            {{ solicitation.quanitidade }}
+          </div>
         </div>
         <div class="example-element-description">
-          {{ element.description }}
+          {{ solicitation.description }}
           <span class="example-element-description-attribution">
             -- Wikipedia
           </span>
@@ -42,10 +48,13 @@
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
   <tr
     mat-row
-    *matRowDef="let element; columns: columnsToDisplay"
+    *matRowDef="let solicitation; columns: columnsToDisplay"
     class="example-element-row"
-    [class.example-expanded-row]="expandedElement === element"
-    (click)="expandedElement = expandedElement === element ? null : element"
+    [class.example-expanded-row]="expandedSolicitation === solicitation"
+    (click)="
+      expandedSolicitation =
+        expandedSolicitation === solicitation ? null : solicitation
+    "
   ></tr>
   <tr
     mat-row

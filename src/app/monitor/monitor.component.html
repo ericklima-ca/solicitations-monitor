@@ -57,16 +57,27 @@
           </button>
         </div>
       </mat-card-actions>
-      <mat-card-actions *ngIf="user?.CenterId == 102">
+      <mat-card-actions
+        *ngIf="
+          user?.CenterId == 102 && user?.CenterId === solicitation.User.CenterId
+        "
+      >
         <div class="action-request">
-          <button (click)="openEditDialog(solicitation)" mat-button color="primary">EDITAR</button>
-          <button 
-          *ngIf="user?.CenterId === solicitation.Center.id"
-          mat-button
-          color="warn"
+          <button
+            (click)="openEditDialog(solicitation)"
+            mat-button
+            color="primary"
           >
-          DELETAR
-        </button>
+            EDITAR
+          </button>
+
+          <button
+            (click)="onDeleteSolicitation(solicitation)"
+            mat-button
+            color="warn"
+          >
+            DELETAR
+          </button>
         </div>
       </mat-card-actions>
     </mat-card>
