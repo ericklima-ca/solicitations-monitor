@@ -29,7 +29,7 @@ export class SolicitationService {
   getSolicitations() {
     this.http
       .get<{ solicitations: Solicitation[] }>(
-        'http://localhost:3000/api/solicitations/'
+        'https://backend-solicitation.herokuapp.com/api/solicitations/'
       )
       .pipe(
         map((response) => {
@@ -65,7 +65,8 @@ export class SolicitationService {
   getProduct(productId: number) {
     this.http
       .get<{ ok: boolean; message: { product: Product } }>(
-        'http://localhost:3000/api/solicitations/new/' + productId
+        'https://backend-solicitation.herokuapp.com/api/solicitations/new/' +
+          productId
       )
       .subscribe({
         next: (response) => {
@@ -83,7 +84,7 @@ export class SolicitationService {
   createSolicitation(solicitation: PostSolicitation) {
     this.http
       .post<{ ok: boolean; message: string; solicitation: Solicitation }>(
-        'http://localhost:3000/api/solicitations/new',
+        'https://backend-solicitation.herokuapp.com/api/solicitations/new',
         solicitation
       )
       .subscribe({
@@ -101,7 +102,7 @@ export class SolicitationService {
     newAmount: { amount: number }
   ) {
     return this.http.put(
-      'http://localhost:3000/api/solicitations/edit/' +
+      'https://backend-solicitation.herokuapp.com/api/solicitations/edit/' +
         solicitationId +
         '/edit',
       newAmount
@@ -116,7 +117,8 @@ export class SolicitationService {
 
   deleteSolicitation(solicitationId: number | null) {
     return this.http.delete(
-      'http://localhost:3000/api/solicitations/delete/' + solicitationId
+      'https://backend-solicitation.herokuapp.com/api/solicitations/delete/' +
+        solicitationId
     );
   }
 }
