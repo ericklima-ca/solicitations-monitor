@@ -9,18 +9,7 @@ import {
 import { SolicitationService } from '../services/solicitation.service';
 import { map } from 'rxjs';
 import { ResponseService } from '../services/response.service';
-
-export interface SolicitationHistory {
-  id: number | null;
-  status: string | null;
-  ordem: string | null;
-  sku: number | null;
-  produto: string | null;
-  quantidade: number | null;
-  usuário: number | null;
-  resposta: string | null;
-  nf: string | null;
-}
+import { Solicitation } from '../models';
 
 @Component({
   selector: 'app-history',
@@ -38,54 +27,57 @@ export interface SolicitationHistory {
   ],
 })
 export class HistoryComponent implements OnInit {
-  dataSource: SolicitationHistory[] = [];
+  dataSource: any[] = [];
   columnsToDisplay = [
     'id',
     'status',
     'ordem',
     'sku',
-    'produto',
     'quantidade',
     'usuário',
     'resposta',
     'nf',
   ];
-  expandedSolicitation: SolicitationHistory | null = null;
+  expandedSolicitation: {
+    id: any;
+    status: any;
+    ordem: any;
+    sku: any;
+    produto: any;
+    quantidade: any;
+    usuário: any;
+    resposta: string;
+    nf: any;
+  } | null = null;
 
   constructor(
     public solicitationService: SolicitationService,
     public responseService: ResponseService
   ) {}
 
-  /* TODO */
   ngOnInit(): void {
     this.responseService.getResponses();
-    let responses: any[] = [];
-    this.responseService.subject.subscribe((responses) => {
-      responses = responses;
-    });
-    this.solicitationService.subject
+
+    this.responseService.subject
       .pipe(
-        map((solicitations) => {
-          return solicitations.map((solicitation) => {
+        map((responses) => {
+          return responses.map((r) => {
             return {
-              id: solicitation.id,
-              status: solicitation.status,
-              ordem: solicitation.order,
-              sku: solicitation.Product.id,
-              produto: solicitation.Product.description,
-              quantidade: solicitation.amount,
-              usuário: solicitation.User.id,
-              resposta: responses.find(
-                (r) => r.SolicitationId == solicitation.id
-              ),
-              nf: solicitation.obs,
+              id: r.Solicitation.id,
+              status: r.Solicitation.status,
+              ordem: r.Solicitation.order,
+              sku: r.Solicitation.Product.id,
+              produto: r.Solicitation.Product.description,
+              quantidade: r.Solicitation.amount,
+              usuário: r.UserId,
+              resposta: r.confirmed ? 'Confirmado' : 'NTP',
+              nf: r.Solicitation.obs,
             };
           });
         })
       )
-      .subscribe((responses) => {
-        this.dataSource = responses;
+      .subscribe((fR) => {
+        this.dataSource = fR;
       });
   }
 }

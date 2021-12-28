@@ -49,11 +49,10 @@ export class MonitorComponent implements OnInit, OnDestroy {
       }
     });
     this.updateMonitor();
-    this.newSolicitationSubs = this.socket
-      .fromEvent('newSolicitation')
-      .subscribe((_) => {
-        this.updateMonitor();
-      });
+    this.socket.connect();
+    this.socket.fromEvent<any>('newSolicitation').subscribe(() => {
+      this.updateMonitor();
+    });
   }
 
   ngOnDestroy(): void {
