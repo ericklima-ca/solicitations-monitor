@@ -7,6 +7,7 @@ import { AuthService } from '../services/auth.service';
 import { from, Observable, of, Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { MonitorEditDialog } from './monitor-edit-dialog/monitor-edit-dialog.component';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-monitor',
@@ -23,7 +24,8 @@ export class MonitorComponent implements OnInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     public solicitationService: SolicitationService,
-    public authService: AuthService
+    public authService: AuthService,
+    private socket: Socket
   ) {}
   openDialog(response: string, solicitation: Solicitation) {
     const dialogRef = this.dialog.open(MonitorDialogResponseComponent, {
@@ -52,9 +54,10 @@ export class MonitorComponent implements OnInit, OnDestroy {
         this.amount = this.solicitations.length;
       }
     );
-    setInterval(() => {
+    this.socket.fromEvent('newSolicitation').subscribe((data) => {
+      console.log(data);
       this.solicitationService.getSolicitations();
-    }, 1000 * 60 * 120);
+    });
   }
 
   ngOnDestroy(): void {

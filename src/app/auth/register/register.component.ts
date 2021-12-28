@@ -29,6 +29,7 @@ export class RegisterComponent implements OnInit {
     this.authService.singup(registerData);
     this.message =
       'Verifique seu e-mail em até 60 minutos e clique no link de confirmação.';
+    form.resetForm();
   }
 
   ngOnInit() {}

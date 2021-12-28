@@ -19,6 +19,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = {
+  url: 'https://backend-solicitation.herokuapp.com',
+  options: {},
+};
+
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -47,7 +53,6 @@ import { MonitorEditDialog } from './monitor/monitor-edit-dialog/monitor-edit-di
     MonitorDialogResponseComponent,
     MonitorEditDialog,
     SolicitationCreateDialog,
-    
   ],
   imports: [
     BrowserModule,
@@ -76,6 +81,7 @@ import { MonitorEditDialog } from './monitor/monitor-edit-dialog/monitor-edit-di
     MatSelectModule,
     MatDialogModule,
     MatAutocompleteModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestsInterceptor, multi: true },

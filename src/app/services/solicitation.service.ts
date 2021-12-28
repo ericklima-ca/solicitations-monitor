@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, map } from 'rxjs';
-import { Center, Product, Solicitation } from 'src/app/models';
+import { Socket } from 'ngx-socket-io';
+
+import { Product, Solicitation } from 'src/app/models';
 import { AuthService } from './auth.service';
 
 interface PostSolicitation {
@@ -20,7 +22,11 @@ export class SolicitationService {
 
   productSubject = new Subject<{ ok: boolean; product: Product | undefined }>();
 
-  constructor(public http: HttpClient, private authService: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private socket: Socket
+  ) {}
 
   get subject() {
     return this.solicitationsSubject.asObservable();
@@ -89,7 +95,7 @@ export class SolicitationService {
       )
       .subscribe({
         next: (_) => {
-          this.getSolicitations();
+          this.publishNewSolicitation();
         },
         error: (error) => {
           console.log(error);
@@ -120,5 +126,9 @@ export class SolicitationService {
       'https://backend-solicitation.herokuapp.com/api/solicitations/delete/' +
         solicitationId
     );
+  }
+
+  private publishNewSolicitation() {
+    this.socket.emit('newSolicitation', 'ok');
   }
 }
