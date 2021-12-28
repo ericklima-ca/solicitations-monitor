@@ -47,16 +47,9 @@ export class MonitorComponent implements OnInit, OnDestroy {
         this.user = undefined;
       }
     });
-    this.solicitationService.getSolicitations();
-    this.solicitationSubs = this.solicitationService.subject.subscribe(
-      (solicitations) => {
-        this.solicitations = solicitations.reverse();
-        this.amount = this.solicitations.length;
-      }
-    );
-    this.socket.fromEvent('newSolicitation').subscribe((data) => {
-      console.log(data);
-      this.solicitationService.getSolicitations();
+    this.updateMonitor();
+    this.socket.fromEvent('newSolicitation').subscribe((_) => {
+      this.updateMonitor();
     });
   }
 
@@ -83,5 +76,15 @@ export class MonitorComponent implements OnInit, OnDestroy {
           this.solicitationService.getSolicitations();
         });
     }
+  }
+
+  private updateMonitor() {
+    this.solicitationService.getSolicitations();
+    this.solicitationSubs = this.solicitationService.subject.subscribe(
+      (solicitations) => {
+        this.solicitations = solicitations.reverse();
+        this.amount = this.solicitations.length;
+      }
+    );
   }
 }
