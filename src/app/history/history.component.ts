@@ -67,7 +67,6 @@ export class HistoryComponent implements OnInit {
     this.solicitationService.subject
       .pipe(
         map((solicitations) => {
-          console.log(solicitations);
           return solicitations.map((solicitation) => {
             return {
               id: solicitation.id,
@@ -86,10 +85,7 @@ export class HistoryComponent implements OnInit {
         })
       )
       .subscribe((responses) => {
-        console.log(responses);
-
         this.dataSource = responses;
       });
-    console.log(this.dataSource);
   }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Socket } from 'ngx-socket-io';
 import { Subject } from 'rxjs';
 import { LoginForm, RegisterForm, AuthUser } from 'src/app/models';
 
@@ -17,7 +18,11 @@ export class AuthService {
   private authToken?: string;
   private authenticationSubject = new Subject<boolean>();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private socket: Socket
+  ) {}
 
   login(loginForm: LoginForm) {
     this.http
@@ -43,6 +48,7 @@ export class AuthService {
     this.delelteAuth();
     this.authenticationSubject.next(false);
     this.router.navigate(['/login']);
+    this.socket.disconnect();
   }
 
   singup(registerForm: RegisterForm) {
@@ -58,6 +64,7 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
     if (!token || !user) {
+      this.logout();
       return;
     }
     this.authToken = token;

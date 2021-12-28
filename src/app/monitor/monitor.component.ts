@@ -18,6 +18,7 @@ export class MonitorComponent implements OnInit, OnDestroy {
   user?: AuthUser;
   authSubs = new Subscription();
   solicitationSubs = new Subscription();
+  newSolicitationSubs = new Subscription();
   solicitations: Solicitation[] = [];
   amount = 0;
 
@@ -48,14 +49,17 @@ export class MonitorComponent implements OnInit, OnDestroy {
       }
     });
     this.updateMonitor();
-    this.socket.fromEvent('newSolicitation').subscribe((_) => {
-      this.updateMonitor();
-    });
+    this.newSolicitationSubs = this.socket
+      .fromEvent('newSolicitation')
+      .subscribe((_) => {
+        this.updateMonitor();
+      });
   }
 
   ngOnDestroy(): void {
     this.authSubs.unsubscribe();
     this.solicitationSubs.unsubscribe();
+    this.newSolicitationSubs.unsubscribe();
   }
 
   openEditDialog(solicitation: Solicitation) {
@@ -82,7 +86,7 @@ export class MonitorComponent implements OnInit, OnDestroy {
     this.solicitationService.getSolicitations();
     this.solicitationSubs = this.solicitationService.subject.subscribe(
       (solicitations) => {
-        this.solicitations = solicitations.reverse();
+        this.solicitations = solicitations;
         this.amount = this.solicitations.length;
       }
     );

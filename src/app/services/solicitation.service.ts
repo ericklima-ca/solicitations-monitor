@@ -97,8 +97,8 @@ export class SolicitationService {
         next: (_) => {
           this.publishNewSolicitation();
         },
-        error: (error) => {
-          console.log(error);
+        error: (_) => {
+          console.log('error');
         },
       });
   }
