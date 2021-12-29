@@ -20,8 +20,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
 const config: SocketIoConfig = {
-  url: 'https://backend-solicitation.herokuapp.com',
+  url: 'http://localhost:3000',
   options: {},
 };
 

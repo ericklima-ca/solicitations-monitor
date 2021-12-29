@@ -35,7 +35,7 @@ export class SolicitationService {
   getSolicitations() {
     this.http
       .get<{ solicitations: Solicitation[] }>(
-        'https://backend-solicitation.herokuapp.com/api/solicitations/'
+        `http://localhost:3000/api/solicitations/`
       )
       .pipe(
         map((response) => {
@@ -71,8 +71,7 @@ export class SolicitationService {
   getProduct(productId: number) {
     this.http
       .get<{ ok: boolean; message: { product: Product } }>(
-        'https://backend-solicitation.herokuapp.com/api/solicitations/new/' +
-          productId
+        `http://localhost:3000/api/solicitations/new/` + productId
       )
       .subscribe({
         next: (response) => {
@@ -90,7 +89,7 @@ export class SolicitationService {
   createSolicitation(solicitation: PostSolicitation) {
     this.http
       .post<{ ok: boolean; message: string; solicitation: Solicitation }>(
-        'https://backend-solicitation.herokuapp.com/api/solicitations/new',
+        `http://localhost:3000/api/solicitations/new`,
         solicitation
       )
       .subscribe({
@@ -108,7 +107,7 @@ export class SolicitationService {
     newAmount: { amount: number }
   ) {
     return this.http.put(
-      'https://backend-solicitation.herokuapp.com/api/solicitations/edit/' +
+      `http://localhost:3000/api/solicitations/edit/` +
         solicitationId +
         '/edit',
       newAmount
@@ -123,12 +122,20 @@ export class SolicitationService {
 
   deleteSolicitation(solicitationId: number | null) {
     return this.http.delete(
-      'https://backend-solicitation.herokuapp.com/api/solicitations/delete/' +
-        solicitationId
+      `http://localhost:3000/api/solicitations/delete/` + solicitationId
     );
   }
 
   private publishNewSolicitation() {
     this.socket.emit('newSolicitation', 'ok');
+  }
+
+  sendEmailforResponse(id: number, response: { obs: string }) {
+    this.http
+      .put<{ ok: boolean; message: string }>(
+        `http://localhost:3000/api/solicitations/edit/${id}/response`,
+        response
+      )
+      .subscribe();
   }
 }
