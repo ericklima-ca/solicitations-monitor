@@ -26,7 +26,10 @@ export class AuthService {
 
   login(loginForm: LoginForm) {
     this.http
-      .post<ResponseData>(`http://localhost:3000/api/auth/login`, loginForm)
+      .post<ResponseData>(
+        `https://backend-solicitation.herokuapp.com/api/auth/login`,
+        loginForm
+      )
       .subscribe({
         next: (response) => {
           if (response.token && response.user) {
@@ -51,7 +54,7 @@ export class AuthService {
   singup(registerForm: RegisterForm) {
     this.http
       .post<{ ok: boolean; message: string }>(
-        `http://localhost:3000/api/auth/signup`,
+        `https://backend-solicitation.herokuapp.com/api/auth/signup`,
         registerForm
       )
       .subscribe();

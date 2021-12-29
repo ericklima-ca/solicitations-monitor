@@ -14,14 +14,14 @@ export class ResponseService {
 
   respondSolicitation(id: number, response: string) {
     return this.http.get<{ ok: boolean; message: string }>(
-      `http://localhost:3000/api/responses/${id}/${response}`
+      `https://backend-solicitation.herokuapp.com/api/responses/${id}/${response}`
     );
   }
 
   getResponses() {
     this.http
       .get<{ ok: boolean; responses: any[] }>(
-        `http://localhost:3000/api/responses/`
+        `https://backend-solicitation.herokuapp.com/api/responses/`
       )
       .subscribe((response) => {
         this.responsesSubject.next(response.responses);
