@@ -10,10 +10,17 @@
 <mat-accordion *ngFor="let solicitation of solicitations">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
-      <small>#{{ solicitation.id }} | {{ solicitation.createdAt }}</small
-      ><br />
-      {{ solicitation.Product.id }} | {{ solicitation.amount }}
-      {{ solicitation.amount > 1 ? "pçs" : "pç" }}
+      <div class="header-solicitation">
+        <small>#{{ solicitation.id }}</small> |
+        {{ solicitation.Product.description.slice(0, 35) }} |
+        {{ solicitation.Product.id }} | {{ solicitation.amount }}
+        {{ solicitation.amount > 1 ? "pçs" : "pç" }}
+      </div>
+      <div>
+        <small>
+          {{ solicitation.createdAt }}
+        </small>
+      </div>
     </mat-expansion-panel-header>
     <mat-card class="solicitation-container">
       <mat-card-title-group>
@@ -32,7 +39,11 @@
       </mat-card-title-group>
       <mat-card-content>
         <p>
-          Quantidade: <b>{{ solicitation.amount }}</b> {{ solicitation.amount > 1 ? "pçs" : "pç" }}
+          Quantidade:
+          <b
+            >{{ solicitation.amount }}
+            {{ solicitation.amount > 1 ? "pçs" : "pç" }}</b
+          >
         </p>
         <p>Ordem: {{ solicitation.order }}</p>
         <p *ngIf="user?.CenterId == 102">

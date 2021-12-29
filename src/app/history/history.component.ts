@@ -24,6 +24,7 @@ interface SolicitationHistory {
   usuário: any;
   resposta: string;
   nf: any;
+  data: any;
 }
 
 @Component({
@@ -83,6 +84,7 @@ export class HistoryComponent implements OnInit {
       .pipe(
         map((responses) => {
           return responses.map((r) => {
+            console.log(r);
             return {
               ref: r.Solicitation.id,
               status: this._setStatus(r.Solicitation.status).text,
@@ -94,12 +96,21 @@ export class HistoryComponent implements OnInit {
               resposta: r.confirmed ? 'Confirmado' : 'NTP',
               nf: r.Solicitation.obs,
               sinal: this._setStatus(r.Solicitation.status).signal,
+              data: new Date(r.createdAt).toLocaleString(),
             };
           });
         })
       )
       .subscribe((fR) => {
-        this.dataSource = fR;
+        this.dataSource = fR.sort((a, b) => {
+          if (a.data > b.data) {
+            return -1;
+          }
+          if (a.data < b.data) {
+            return 1;
+          }
+          return 0;
+        });
       });
   }
 }

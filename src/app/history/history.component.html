@@ -49,6 +49,7 @@
         </div>
         <div class="body-side">
           <p *ngIf="solicitation.ordem">Ordem: {{ solicitation.ordem }}</p>
+          <p>Data: {{ solicitation.data }}</p>
           <div class="form">
             <form
               #form="ngForm"
@@ -58,7 +59,7 @@
               "
             >
               <mat-form-field appearance="standard">
-                <mat-label> Responder solicitação </mat-label>
+                <mat-label> Responder </mat-label>
                 <input
                   name="obs"
                   matInput
@@ -67,9 +68,10 @@
                   pattern="([0-9]+)(-|/)([0-9]{3})$"
                   ngModel
                   #obs="ngModel"
+                  [disabled]="obs.invalid ? true : false"
                 />
                 <mat-error *ngIf="obs.invalid"
-                  >Separe a série com '/' or '-'. Ex: 1234-113</mat-error
+                  >Separe a série com '/' or '-'. Ex: 123456-123</mat-error
                 >
               </mat-form-field>
 
