@@ -22,7 +22,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 const config: SocketIoConfig = {
-  url: 'http://localhost:3000',
+  url: `https://backend-solicitation.herokuapp.com`,
   options: {},
 };
 
