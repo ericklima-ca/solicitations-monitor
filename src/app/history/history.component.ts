@@ -9,7 +9,22 @@ import {
 import { SolicitationService } from '../services/solicitation.service';
 import { map } from 'rxjs';
 import { ResponseService } from '../services/response.service';
-import { Solicitation } from '../models';
+import { AuthService } from '../services/auth.service';
+import { AuthUser } from '../models';
+import { NgForm } from '@angular/forms';
+
+interface SolicitationHistory {
+  ref: any;
+  sinal: any;
+  status: any;
+  ordem: any;
+  sku: any;
+  produto: any;
+  quantidade: any;
+  usuário: any;
+  resposta: string;
+  nf: any;
+}
 
 @Component({
   selector: 'app-history',
@@ -27,35 +42,41 @@ import { Solicitation } from '../models';
   ],
 })
 export class HistoryComponent implements OnInit {
-  dataSource: any[] = [];
-  columnsToDisplay = [
-    'id',
-    'status',
-    'ordem',
-    'sku',
-    'quantidade',
-    'usuário',
-    'resposta',
-    'nf',
-  ];
-  expandedSolicitation: {
-    id: any;
-    status: any;
-    ordem: any;
-    sku: any;
-    produto: any;
-    quantidade: any;
-    usuário: any;
-    resposta: string;
-    nf: any;
-  } | null = null;
+  currentUser: AuthUser | undefined;
+  dataSource: SolicitationHistory[] = [];
+  columnsToDisplay = ['ref', 'status', 'sku', 'usuário', 'resposta', 'nf'];
+  expandedSolicitation: SolicitationHistory | null = null;
 
   constructor(
     public solicitationService: SolicitationService,
-    public responseService: ResponseService
+    public responseService: ResponseService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authService.user;
+    this.updateResponses();
+  }
+
+  sendNf(solicitation: SolicitationHistory, form: NgForm) {
+    this.solicitationService.sendEmailforResponse(solicitation.ref, {
+      obs: form.value.obs,
+    });
+    form.resetForm();
+    this.responseService.getResponses();
+    this.updateResponses();
+  }
+
+  private _setStatus(s: any): { text: string; signal: string } {
+    switch (s) {
+      case 'finished':
+        return { text: 'Finalizada', signal: 'done' };
+      default:
+        return { text: 'Em faturamento', signal: 'priority_high' };
+    }
+  }
+
+  private updateResponses() {
     this.responseService.getResponses();
 
     this.responseService.subject
@@ -63,15 +84,16 @@ export class HistoryComponent implements OnInit {
         map((responses) => {
           return responses.map((r) => {
             return {
-              id: r.Solicitation.id,
-              status: r.Solicitation.status,
+              ref: r.Solicitation.id,
+              status: this._setStatus(r.Solicitation.status).text,
               ordem: r.Solicitation.order,
               sku: r.Solicitation.Product.id,
               produto: r.Solicitation.Product.description,
               quantidade: r.Solicitation.amount,
-              usuário: r.UserId,
+              usuário: r.User.name,
               resposta: r.confirmed ? 'Confirmado' : 'NTP',
               nf: r.Solicitation.obs,
+              sinal: this._setStatus(r.Solicitation.status).signal,
             };
           });
         })
