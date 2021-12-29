@@ -68,7 +68,7 @@
                   pattern="([0-9]+)(-|/)([0-9]{3})$"
                   ngModel
                   #obs="ngModel"
-                  [disabled]="obs.invalid ? true : false"
+                  required
                 />
                 <mat-error *ngIf="obs.invalid"
                   >Separe a série com '/' or '-'. Ex: 123456-123</mat-error
@@ -80,6 +80,7 @@
                 (click)="sendNf(solicitation, form)"
                 mat-raised-button
                 color="primary"
+                [disabled]="obs.invalid ? true : false"
               >
                 Enviar NF
               </button>
