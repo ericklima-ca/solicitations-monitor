@@ -36,15 +36,33 @@ mat-card {
 .header-info {
   margin: 1% 0 0 0;
 }
+.solicitation-icon {
+  margin: auto;
+}
+#arrow-icon {
+  margin-top: 10px;
+}
 
-.header-solicitation {
+.solicitation-header {
+  margin: auto 1rem auto 1rem;
   width: 100%;
-  text-align: left;
+  text-align: center;
   text-justify: inter-word;
+}
+
+.solicitation-id {
+  margin: auto 0 auto 1rem;
+  font-size: 14px;
+}
+
+.solicitation-date {
+  margin: auto 1rem auto 0;
+  font-size: 14px;
 }
 
 mat-expansion-panel-header {
   flex: auto;
+  height: 3rem;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -56,7 +74,7 @@ mat-expansion-panel-header {
 
 @media only screen and (min-width: 1000px) {
   img {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
   }
 }

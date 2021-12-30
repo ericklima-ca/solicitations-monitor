@@ -116,9 +116,7 @@ export class SolicitationService {
   }
 
   private _formatTimestamp(ts: string) {
-    const date = new Date(ts).toLocaleDateString();
-    const time = new Date(ts).toLocaleTimeString();
-    return `${date} ${time}`;
+    return new Date(ts).toLocaleString();
   }
 
   deleteSolicitation(solicitationId: number | null) {

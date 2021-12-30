@@ -41,6 +41,7 @@ import { MonitorDialogResponseComponent } from './monitor/monitor-dialog-respons
 import { RequestsInterceptor } from './services/requests-interceptor.service';
 import { SolicitationCreateDialog } from './solicitations/solicitation-create/solicitation-create-dialog/solicitation-create-dialog.component';
 import { MonitorEditDialog } from './monitor/monitor-edit-dialog/monitor-edit-dialog.component';
+import { HistoryDialogComponent } from './history/history-dialog/history-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MonitorEditDialog } from './monitor/monitor-edit-dialog/monitor-edit-di
     SolicitationCreateComponent,
     MonitorComponent,
     HistoryComponent,
+    HistoryDialogComponent,
     LoginComponent,
     RegisterComponent,
     MonitorDialogResponseComponent,

@@ -1,70 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-import { SolicitationService } from '../services/solicitation.service';
+import { NgForm } from '@angular/forms';
 import { map } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+import { SolicitationService } from '../services/solicitation.service';
 import { ResponseService } from '../services/response.service';
 import { AuthService } from '../services/auth.service';
-import { AuthUser } from '../models';
-import { NgForm } from '@angular/forms';
-
-interface SolicitationHistory {
-  ref: any;
-  sinal: any;
-  status: any;
-  ordem: any;
-  sku: any;
-  produto: any;
-  quantidade: any;
-  usuário: any;
-  resposta: string;
-  nf: any;
-  data: any;
-}
+import { AuthUser, SolicitationHistory } from '../models';
+import { HistoryDialogComponent } from './history-dialog/history-dialog.component';
 
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition(
-        'expanded <=> collapsed',
-        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
-      ),
-    ]),
-  ],
 })
 export class HistoryComponent implements OnInit {
   currentUser: AuthUser | undefined;
   dataSource: SolicitationHistory[] = [];
-  columnsToDisplay = ['ref', 'status', 'sku', 'usuário', 'resposta', 'nf'];
-  expandedSolicitation: SolicitationHistory | null = null;
+  columnsToDisplay = [
+    'ref',
+    'status',
+    'sku',
+    'quantidade',
+    'usuario',
+    'resposta',
+    'nf',
+    'view',
+  ];
 
   constructor(
     public solicitationService: SolicitationService,
     public responseService: ResponseService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.user;
-    this.updateResponses();
-  }
-
-  sendNf(solicitation: SolicitationHistory, form: NgForm) {
-    this.solicitationService.sendEmailforResponse(solicitation.ref, {
-      obs: form.value.obs,
-    });
-    form.resetForm();
-    this.responseService.getResponses();
     this.updateResponses();
   }
 
@@ -92,7 +64,7 @@ export class HistoryComponent implements OnInit {
               sku: r.Solicitation.Product.id,
               produto: r.Solicitation.Product.description,
               quantidade: r.Solicitation.amount,
-              usuário: r.User.name,
+              usuario: r.User.name,
               resposta: r.confirmed ? 'Confirmado' : 'NTP',
               nf: r.Solicitation.obs,
               sinal: this._setStatus(r.Solicitation.status).signal,
@@ -112,5 +84,13 @@ export class HistoryComponent implements OnInit {
           return 0;
         });
       });
+  }
+
+  openDialog(solicitation: SolicitationHistory) {
+    const dialogRef = this.dialog.open(HistoryDialogComponent, {
+      data: {
+        solicitation: { ...solicitation },
+      },
+    });
   }
 }

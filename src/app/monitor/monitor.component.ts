@@ -4,8 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MonitorDialogResponseComponent } from './monitor-dialog-response/monitor-dialog-response.component';
 import { SolicitationService } from '../services/solicitation.service';
 import { AuthService } from '../services/auth.service';
-import { from, Observable, of, Subscription } from 'rxjs';
-import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { MonitorEditDialog } from './monitor-edit-dialog/monitor-edit-dialog.component';
 import { Socket } from 'ngx-socket-io';
 

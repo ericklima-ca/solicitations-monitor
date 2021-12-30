@@ -1,71 +1,68 @@
+.history-container {
+  height: 620px;
+  width: 100%;
+  max-width: 100%;
+  overflow: auto;
+}
+td.mat-column-view,
+th.mat-column-view {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 10px;
+  text-align: center;
+}
+td.mat-column-sku,
+td.mat-column-status,
+td.mat-column-usuario,
+td.mat-column-resposta,
+th.mat-column-sku,
+th.mat-column-status,
+th.mat-column-usuario,
+th.mat-column-resposta,
+th.mat-column-quantidade,
+td.mat-column-quantidade,
+td.mat-column-ref,
+th.mat-column-ref,
+td.mat-column-nf,
+th.mat-column-nf {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+td.mat-column-nf,
+th.mat-column-nf {
+  width: 200px;
+}
+
 table {
   width: 100%;
 }
 
-tr.example-detail-row {
-  height: 0;
+tr:hover {
+  background: rgb(253, 247, 255);
 }
 
-tr.example-element-row:not(.example-expanded-row):hover {
-  background: whitesmoke;
+.mat-table-sticky-border-elem-right {
+  border-left: 1px solid #e0e0e0;
 }
 
-tr.example-element-row:not(.example-expanded-row):active {
-  background: #efefef;
+.mat-table-sticky-border-elem-left {
+  border-right: 1px solid #e0e0e0;
 }
 
-.example-element-row td {
-  border-bottom-width: 0;
+.rows {
+  height: 1px;
+  width: auto;
+}
+.rows-th {
+  height: 2rem;
 }
 
-.solicitation-detail {
-  overflow: hidden;
-  display: flex;
+#NTP {
+  color: rgb(189, 39, 39);
 }
-
-@media only screen and (min-device-width: 480px) {
-  .box {
-    width: 30%;
-    border: 1px solid black;
-    padding: 5px;
-    font-weight: lighter;
-    margin: 4px 0;
-    height: 80px;
-  }
-  .product {
-    font-weight: bold;
-    font-size: 10px;
-    line-height: normal;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-}
-.box {
-  width: 60%;
-  border: 2px solid black;
-  padding: 8px;
-  font-weight: lighter;
-  margin: 8px 0;
-  height: 104px;
-}
-
-.product {
-  font-weight: bold;
-  font-size: 15px;
-  line-height: normal;
-}
-
-.body-side {
-  padding: 16px;
-}
-.status {
-  margin-bottom: 10px;
-}
-.form {
-  margin-top: 8%;
-}
-
-.btn {
-  margin-left: 1rem;
+#Confirmado {
+  color: rgb(39, 189, 39);
 }

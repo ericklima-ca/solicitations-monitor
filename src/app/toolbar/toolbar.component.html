@@ -39,7 +39,8 @@
     <a
       *ngIf="isAuth"
       (click)="onLogout()"
-      mat-button
+      mat-raised-button
+      color="warn"
       routerLink="/logout"
       routerLinkActive="mat-primary"
       >Sair</a

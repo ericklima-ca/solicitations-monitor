@@ -1,110 +1,76 @@
-<table
-  mat-table
-  [dataSource]="dataSource"
-  multiTemplateDataRows
-  class="mat-elevation-z8"
->
-  <ng-container
-    *ngFor="let column of columnsToDisplay"
-    matColumnDef="{{ column }}"
-  >
-    <th mat-header-cell *matHeaderCellDef>{{ column.toUpperCase() }}</th>
-    <td mat-cell *matCellDef="let solicitation">
-      {{ solicitation[column] }}
-    </td>
-  </ng-container>
+<div class="history-container">
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+    <ng-container matColumnDef="ref">
+      <th mat-header-cell *matHeaderCellDef>REF</th>
+      <td mat-cell *matCellDef="let solicitation">
+        {{ solicitation.ref }}
+      </td>
+    </ng-container>
 
-  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-  <ng-container matColumnDef="expandedDetail">
-    <td
-      mat-cell
-      *matCellDef="let solicitation"
-      [attr.colspan]="columnsToDisplay.length"
-    >
-      <div
-        class="solicitation-detail"
-        [@detailExpand]="
-          solicitation == expandedSolicitation ? 'expanded' : 'collapsed'
-        "
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>STATUS</th>
+      <td mat-cell *matCellDef="let solicitation">
+        {{ solicitation.status }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sku">
+      <th mat-header-cell *matHeaderCellDef>SKU</th>
+      <td mat-cell *matCellDef="let solicitation">
+        {{ solicitation.sku }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantidade">
+      <th mat-header-cell *matHeaderCellDef>QTD</th>
+      <td mat-cell *matCellDef="let solicitation">
+        {{ solicitation.quantidade }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="usuario">
+      <th mat-header-cell *matHeaderCellDef>USUÁRIO</th>
+      <td mat-cell *matCellDef="let solicitation">
+        {{ solicitation.usuario }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="resposta">
+      <th mat-header-cell *matHeaderCellDef>RESPOSTA</th>
+      <td
+        id="{{ solicitation.resposta }}"
+        mat-cell
+        *matCellDef="let solicitation"
       >
-        <div class="box">
-          <div class="status">
-            <small>Status:</small>
-            {{ solicitation.status }}
-          </div>
-          <div class="sku">
-            {{ solicitation.sku }}
-          </div>
-          <div class="product">{{ solicitation.produto }}</div>
-          <p>
-            Reservado com:
-            {{ solicitation["usuário"] }}
-            <br />
-            Quantidade:
-            <b
-              >{{ solicitation.quantidade }}
-              {{ solicitation.quantidade > 1 ? "pçs" : "pç" }}</b
-            >
-          </p>
-        </div>
-        <div class="body-side">
-          <p *ngIf="solicitation.ordem">Ordem: {{ solicitation.ordem }}</p>
-          <p>Data: {{ solicitation.data }}</p>
-          <div class="form">
-            <form
-              #form="ngForm"
-              *ngIf="
-                solicitation.status != 'Finalizada' &&
-                currentUser?.CenterId == 102
-              "
-            >
-              <mat-form-field appearance="standard">
-                <mat-label> Responder </mat-label>
-                <input
-                  name="obs"
-                  matInput
-                  type="text"
-                  placeholder="Coloque o número da NF"
-                  pattern="([0-9]+)(-|/)([0-9]{3})$"
-                  ngModel
-                  #obs="ngModel"
-                  required
-                />
-                <mat-error *ngIf="obs.invalid"
-                  >Separe a série com '/' or '-'. Ex: 123456-123</mat-error
-                >
-              </mat-form-field>
+        {{ solicitation.resposta }}
+      </td>
+    </ng-container>
 
-              <button
-                class="btn"
-                (click)="sendNf(solicitation, form)"
-                mat-raised-button
-                color="primary"
-                [disabled]="obs.invalid ? true : false"
-              >
-                Enviar NF
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="nf">
+      <th mat-header-cell *matHeaderCellDef>NF</th>
+      <td mat-cell *matCellDef="let solicitation">
+        {{ solicitation.nf }}
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
-  <tr
-    mat-row
-    *matRowDef="let solicitation; columns: columnsToDisplay"
-    class="example-element-row"
-    [class.example-expanded-row]="expandedSolicitation === solicitation"
-    (click)="
-      expandedSolicitation =
-        expandedSolicitation === solicitation ? null : solicitation
-    "
-  ></tr>
-  <tr
-    mat-row
-    *matRowDef="let row; columns: ['expandedDetail']"
-    class="example-detail-row"
-  ></tr>
-</table>
+    <ng-container matColumnDef="view" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let solicitation">
+        <a (click)="openDialog(solicitation)">
+          <mat-icon>more_vert</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+
+    <tr
+      class="rows rows-th"
+      mat-header-row
+      *matHeaderRowDef="columnsToDisplay; sticky: true"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let solicitation; columns: columnsToDisplay"
+      class="rows"
+    ></tr>
+  </table>
+</div>

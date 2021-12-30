@@ -10,13 +10,21 @@
 <mat-accordion *ngFor="let solicitation of solicitations">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
-      <div class="header-solicitation">
-        <small>#{{ solicitation.id }}</small> |
-        {{ solicitation.Product.description.slice(0, 35) }} |
-        {{ solicitation.Product.id }} | {{ solicitation.amount }}
-        {{ solicitation.amount > 1 ? "pçs" : "pç" }}
+      <div class="solicitation-icon">
+        <mat-icon>info</mat-icon>
       </div>
-      <div>
+      <div class="solicitation-id">
+        <small>#{{ solicitation.id }}</small>
+      </div>
+      <div class="solicitation-header">
+        <div>
+          {{ solicitation.Product.id }}
+          <span> - </span>
+          {{ solicitation.amount }}
+          {{ solicitation.amount > 1 ? "pçs" : "pç" }}
+        </div>
+      </div>
+      <div class="solicitation-date">
         <small>
           {{ solicitation.createdAt }}
         </small>
@@ -63,7 +71,7 @@
             CONFIRMADO
           </button>
           <button
-            mat-button
+            mat-stroked-button
             color="warn"
             (click)="openDialog('NTP', solicitation)"
           >

@@ -62,3 +62,17 @@ export interface AuthUser {
   id: number;
   CenterId: number;
 }
+
+export interface SolicitationHistory {
+  ref: any;
+  sinal: any;
+  status: any;
+  ordem: any;
+  sku: any;
+  produto: any;
+  quantidade: any;
+  usuario: any;
+  resposta: string;
+  nf: any;
+  data: any;
+}
