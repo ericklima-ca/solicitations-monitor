@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SolicitationHistory } from 'src/app/models';
+import { AuthUser, SolicitationHistory } from 'src/app/models';
 import { ResponseService } from 'src/app/services/response.service';
 import { SolicitationService } from 'src/app/services/solicitation.service';
 
@@ -11,7 +11,8 @@ import { SolicitationService } from 'src/app/services/solicitation.service';
 })
 export class HistoryDialogComponent {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { solicitation: SolicitationHistory },
+    @Inject(MAT_DIALOG_DATA)
+    public data: { solicitation: SolicitationHistory; currentUser: AuthUser },
     private solicitationService: SolicitationService,
     private responseService: ResponseService
   ) {}

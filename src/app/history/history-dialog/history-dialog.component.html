@@ -1,9 +1,48 @@
-<h1 mat-dialog-title>INFO</h1>
-<mat-dialog-content>
-  <form
-    #form="ngForm"
-    *ngIf="data.solicitation.status == 'Em faturamento'"
-  ></form>
-</mat-dialog-content>
+<div class="history-dialog-container">
+  <h2 mat-dialog-title>Informações</h2>
+  <mat-dialog-content>
+    <form
+      #form="ngForm"
+      *ngIf="
+        data.solicitation.status != 'Finalizada' &&
+        data.currentUser?.CenterId == 102
+      "
+    >
+      <mat-form-field appearance="standard">
+        <mat-label> Responder </mat-label>
+        <input
+          name="obs"
+          matInput
+          type="text"
+          placeholder="Coloque o número da NF"
+          pattern="([0-9]+)(-|/)([0-9]{3})$"
+          ngModel
+          #obs="ngModel"
+          required
+        />
+        <mat-error *ngIf="obs.invalid">Ex: 123456-123 ou 123456/123</mat-error>
+      </mat-form-field>
 
-<mat-dialog-actions></mat-dialog-actions>
+      <button
+        class="btn"
+        (click)="sendNf(data.solicitation, form)"
+        mat-raised-button
+        color="primary"
+        [disabled]="obs.invalid ? true : false"
+      >
+        Enviar NF
+      </button>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button
+      mat-button
+      cdkFocusInitial
+      [mat-dialog-close]="true"
+      mat-dialog-close
+    >
+      Fechar
+    </button>
+  </mat-dialog-actions>
+</div>

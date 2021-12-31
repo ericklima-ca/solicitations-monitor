@@ -90,7 +90,13 @@ export class HistoryComponent implements OnInit {
     const dialogRef = this.dialog.open(HistoryDialogComponent, {
       data: {
         solicitation: { ...solicitation },
+        currentUser: this.currentUser,
       },
+    });
+    dialogRef.afterClosed().subscribe((r) => {
+      if (r) {
+        this.updateResponses();
+      }
     });
   }
 }
