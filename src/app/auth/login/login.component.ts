@@ -25,6 +25,7 @@ export class LoginComponent {
         this.router.navigate(['/']);
       } else {
         this.message = 'Matrícula ou senha incorreta';
+        form.resetForm();
       }
     });
   }

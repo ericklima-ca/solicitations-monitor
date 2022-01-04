@@ -75,4 +75,5 @@ export interface SolicitationHistory {
   resposta: string;
   nf: any;
   data: any;
+  centro: any;
 }

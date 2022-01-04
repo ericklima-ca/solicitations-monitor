@@ -107,6 +107,7 @@ export class SolicitationService {
     solicitationId: number | null,
     newAmount: { amount: number }
   ) {
+    this.socket.emit('newSolicitation', 'ok');
     return this.http.put(
       `https://backend-solicitation.herokuapp.com/api/solicitations/edit/` +
         solicitationId +
@@ -120,6 +121,7 @@ export class SolicitationService {
   }
 
   deleteSolicitation(solicitationId: number | null) {
+    this.socket.emit('newSolicitation', 'ok');
     return this.http.delete(
       `https://backend-solicitation.herokuapp.com/api/solicitations/delete/` +
         solicitationId
@@ -129,8 +131,8 @@ export class SolicitationService {
   private publishNewSolicitation() {
     this.socket.emit('newSolicitation', 'ok');
   }
-  private publishNewResponse() {
-    this.socket.emit('newResponse');
+  private publishUpdateSolicitation() {
+    this.socket.emit('updateResponse');
   }
 
   sendEmailforResponse(id: number, response: { obs: string }) {
@@ -140,7 +142,7 @@ export class SolicitationService {
         response
       )
       .subscribe(() => {
-        this.publishNewResponse();
+        this.publishUpdateSolicitation();
       });
   }
 }

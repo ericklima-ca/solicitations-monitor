@@ -1,22 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { map } from 'rxjs';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+} from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { map, Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 import { SolicitationService } from '../services/solicitation.service';
 import { ResponseService } from '../services/response.service';
 import { AuthService } from '../services/auth.service';
 import { AuthUser, SolicitationHistory } from '../models';
 import { HistoryDialogComponent } from './history-dialog/history-dialog.component';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css'],
 })
-export class HistoryComponent implements OnInit {
-  currentUser: AuthUser | undefined;
+export class HistoryComponent implements OnInit, OnDestroy {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   dataSource: SolicitationHistory[] = [];
+
+  newResponseSubs = new Subscription();
+  responsesSubs = new Subscription();
+  updateResponseSubs = new Subscription();
+  currentUser: AuthUser | undefined;
   columnsToDisplay = [
     'ref',
     'status',
@@ -32,12 +47,28 @@ export class HistoryComponent implements OnInit {
     public solicitationService: SolicitationService,
     public responseService: ResponseService,
     private authService: AuthService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private socket: Socket
   ) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.user;
     this.updateResponses();
+    this.newResponseSubs = this.socket
+      .fromEvent<any>('newResponse')
+      .subscribe(() => {
+        this.updateResponses();
+      });
+    this.updateResponseSubs = this.socket
+      .fromEvent<any>('updateResponse')
+      .subscribe(() => {
+        this.updateResponses();
+      });
+  }
+  ngOnDestroy(): void {
+    this.newResponseSubs.unsubscribe();
+    this.responsesSubs.unsubscribe();
+    this.updateResponseSubs.unsubscribe();
   }
 
   private _setStatus(s: any): { text: string; signal: string } {
@@ -52,11 +83,10 @@ export class HistoryComponent implements OnInit {
   private updateResponses() {
     this.responseService.getResponses();
 
-    this.responseService.subject
+    this.responsesSubs = this.responseService.subject
       .pipe(
         map((responses) => {
           return responses.map((r) => {
-            console.log(r);
             return {
               ref: r.Solicitation.id,
               status: this._setStatus(r.Solicitation.status).text,
@@ -69,16 +99,19 @@ export class HistoryComponent implements OnInit {
               nf: r.Solicitation.obs,
               sinal: this._setStatus(r.Solicitation.status).signal,
               data: new Date(r.createdAt).toLocaleString(),
+              centro: r.Solicitation.Center.id,
             };
           });
         })
       )
       .subscribe((fR) => {
         this.dataSource = fR.sort((a, b) => {
-          if (a.data > b.data) {
+          const aDate = new Date(a.data);
+          const bDate = new Date(b.data);
+          if (aDate > bDate) {
             return -1;
           }
-          if (a.data < b.data) {
+          if (aDate < bDate) {
             return 1;
           }
           return 0;

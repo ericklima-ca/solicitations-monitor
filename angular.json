@@ -76,6 +76,7 @@
             },
             "development": {
               "browserTarget": "solicitations-monitor:build:development",
+              "host": "192.168.15.77",
               "port": 3200
             }
           },

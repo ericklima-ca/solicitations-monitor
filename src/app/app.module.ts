@@ -18,7 +18,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 const config: SocketIoConfig = {
@@ -85,6 +86,8 @@ import { HistoryDialogComponent } from './history/history-dialog/history-dialog.
     MatDialogModule,
     MatAutocompleteModule,
     SocketIoModule.forRoot(config),
+    MatSortModule,
+    MatPaginatorModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestsInterceptor, multi: true },

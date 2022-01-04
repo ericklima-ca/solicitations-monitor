@@ -1,16 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Socket } from 'ngx-socket-io';
 import { Subject } from 'rxjs';
-import { Response } from '../models';
-import { SolicitationService } from './solicitation.service';
 
 @Injectable({ providedIn: 'root' })
 export class ResponseService {
   private responsesSubject = new Subject<any[]>();
-  constructor(
-    public http: HttpClient,
-    public solicitationService: SolicitationService
-  ) {}
+  constructor(private http: HttpClient, private socket: Socket) {}
 
   respondSolicitation(id: number, response: string) {
     return this.http.get<{ ok: boolean; message: string }>(
@@ -30,5 +26,9 @@ export class ResponseService {
 
   get subject() {
     return this.responsesSubject.asObservable();
+  }
+
+  publishNewResponse() {
+    this.socket.emit('newResponse');
   }
 }

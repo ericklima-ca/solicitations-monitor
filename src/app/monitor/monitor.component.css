@@ -58,6 +58,7 @@ mat-card {
 .solicitation-date {
   margin: auto 1rem auto 0;
   font-size: 14px;
+  line-height: 1rem;
 }
 
 mat-expansion-panel-header {

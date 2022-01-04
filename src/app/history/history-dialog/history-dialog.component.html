@@ -1,48 +1,57 @@
 <div class="history-dialog-container">
-  <h2 mat-dialog-title>Informações</h2>
+  <h2 mat-dialog-title>Informações #{{ data.solicitation.ref }}</h2>
   <mat-dialog-content>
-    <form
-      #form="ngForm"
+    <p>Status: {{ data.solicitation.status }}</p>
+    <p>Data: {{ data.solicitation.data }}</p>
+    <p>Respondido por: {{ data.solicitation.usuario }}</p>
+    <p>SKU: {{ data.solicitation.sku }}</p>
+    <p>Produto: {{ data.solicitation.produto }}</p>
+    <p>Quantidade: {{ data.solicitation.quantidade }}</p>
+    <p>Resposta: {{ data.solicitation.resposta }}</p>
+    <p *ngIf="data.solicitation.ordem">Ordem: {{ data.solicitation.ordem }}</p>
+    <p *ngIf="data.solicitation.nf">NF: {{ data.solicitation.nf }}</p>
+    <p>Centro: {{ data.solicitation.centro }}</p>
+    <div
       *ngIf="
         data.solicitation.status != 'Finalizada' &&
         data.currentUser?.CenterId == 102
       "
     >
-      <mat-form-field appearance="standard">
-        <mat-label> Responder </mat-label>
-        <input
-          name="obs"
-          matInput
-          type="text"
-          placeholder="Coloque o número da NF"
-          pattern="([0-9]+)(-|/)([0-9]{3})$"
-          ngModel
-          #obs="ngModel"
-          required
-        />
-        <mat-error *ngIf="obs.invalid">Ex: 123456-123 ou 123456/123</mat-error>
-      </mat-form-field>
+      <mat-divider style="margin-bottom: 1rem"></mat-divider>
+      <h3>Responder com NF</h3>
+      <form #form="ngForm">
+        <mat-form-field appearance="standard">
+          <mat-label> Responder </mat-label>
+          <input
+            name="obs"
+            matInput
+            type="text"
+            placeholder="Coloque o número da NF"
+            pattern="([0-9]+)(-|/)([0-9]{3})$"
+            ngModel
+            #obs="ngModel"
+            required
+          />
+          <mat-error *ngIf="obs.invalid"
+            >Ex: 123456-123 ou 123456/123</mat-error
+          >
+        </mat-form-field>
 
-      <button
-        class="btn"
-        (click)="sendNf(data.solicitation, form)"
-        mat-raised-button
-        color="primary"
-        [disabled]="obs.invalid ? true : false"
-      >
-        Enviar NF
-      </button>
-    </form>
+        <button
+          class="btn"
+          (click)="sendNf(data.solicitation, form)"
+          mat-raised-button
+          color="primary"
+          [disabled]="obs.invalid ? true : false"
+          [mat-dialog-close]="true"
+        >
+          Enviar NF
+        </button>
+      </form>
+    </div>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
-    <button
-      mat-button
-      cdkFocusInitial
-      [mat-dialog-close]="true"
-      mat-dialog-close
-    >
-      Fechar
-    </button>
+    <button mat-button cdkFocusInitial mat-dialog-close>Fechar</button>
   </mat-dialog-actions>
 </div>

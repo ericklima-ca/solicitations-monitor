@@ -33,6 +33,7 @@ export class MonitorDialogResponseComponent {
       )
       .subscribe(() => {
         this.solicitationService.getSolicitations();
+        this.responseService.publishNewResponse();
         alert(
           `Solicitação #${this.data.SolicitationId} respondida: ${this.data.response}`
         );
