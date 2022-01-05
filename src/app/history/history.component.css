@@ -4,6 +4,7 @@
   max-width: 100%;
   overflow: auto;
 }
+
 td.mat-column-view,
 th.mat-column-view {
   padding-left: 1rem;

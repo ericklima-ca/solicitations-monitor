@@ -1,13 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  AfterViewInit,
-  ViewChild,
-} from '@angular/core';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -24,8 +15,6 @@ import { Socket } from 'ngx-socket-io';
   styleUrls: ['./history.component.css'],
 })
 export class HistoryComponent implements OnInit, OnDestroy {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
   dataSource: SolicitationHistory[] = [];
 
   newResponseSubs = new Subscription();
